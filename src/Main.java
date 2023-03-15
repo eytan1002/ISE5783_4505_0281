@@ -3,8 +3,6 @@ import static primitives.Util.isZero;
 
 import primitives.Point;
 import primitives.Vector;
-import primitivs.Point;
-import primitivs.Vector;
 
 /** Test program for the 1st stage
  * @author Dan Zilberstein */

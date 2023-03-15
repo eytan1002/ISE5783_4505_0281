@@ -1,5 +1,4 @@
-package primitivs;
-import java.util.Objects;
+package primitives;
 
 public class Ray {
  final Point p0;

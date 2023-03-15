@@ -1,14 +1,13 @@
-package primitivs;
+package primitives;
 
 import java.util.Objects;
 
 public class Point {
     final Double3 xyz;
 
-    public Point(int x, int y, int z) {
+    public Point(double x, double y, double z) {
         xyz = new Double3(x, y, z);
     }
-
     Point(Double3 double3) {
         this(double3.d1, double3.d2, double3.d3);
     }

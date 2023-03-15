@@ -1,4 +1,4 @@
-package primitivs;
+package primitives;
 
 public class Vector extends Point {
 
@@ -18,10 +18,10 @@ public class Vector extends Point {
 
 
     public double length(){
-        return Math.sqrt(lenghSquared());
+        return Math.sqrt(lengthSquared());
     }
 
-    private double lenghSquared(){
+    public double lengthSquared(){
         double x = xyz.d1;
         double y = xyz.d2;
         double z = xyz.d3;

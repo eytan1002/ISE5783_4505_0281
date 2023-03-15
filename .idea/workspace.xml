@@ -4,26 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b2d1496-0a75-4343-98c3-d8902f07fbe6" name="Changes" comment="firstA">
+    <list default="true" id="4b2d1496-0a75-4343-98c3-d8902f07fbe6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitivs/Double3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitivs/Double3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitivs/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitivs/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitivs/Ray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitivs/Ray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitivs/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitivs/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitivs/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitivs/Vector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitivs/Double3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Double3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitivs/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitivs/Ray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Ray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitivs/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitivs/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Vector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,16 +36,6 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="primitivs" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\eytan\IdeaProjectsi\ISE\src\ISE5783_4505_0281\src" />
-      <recent name="C:\Users\eytan\IdeaProjectsi\ISE\src\ISE5783_4505_0281\src\geometries" />
-      <recent name="C:\Users\eytan\IdeaProjectsi\ISE\src\ISE5783_4505_0281\src\primitivs" />
-    </key>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -63,9 +46,5 @@
       <updated>1677598657601</updated>
     </task>
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="firstA" />
-    <option name="LAST_COMMIT_MESSAGE" value="firstA" />
   </component>
 </project>
