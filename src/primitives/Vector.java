@@ -8,14 +8,11 @@ public class Vector extends Point {
             throw new IllegalArgumentException("Vector cannot be Vector(0,0,0)");
     }
 
-
     Vector(Double3 double3){
         super(double3);
         if (double3.equals(Double3.ZERO))
             throw new IllegalArgumentException("Vector cannot be Vector(0,0,0)");
     }
-
-
 
     public double length(){
         return Math.sqrt(lengthSquared());
