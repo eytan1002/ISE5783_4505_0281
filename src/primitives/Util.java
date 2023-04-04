@@ -36,7 +36,6 @@ public abstract class Util {
 	public static boolean isZero(double number) {
 		return getExp(number) < ACCURACY;
 	}
-
 	/**
 	 * Aligns the number to zero if it is almost zero
 	 * 

@@ -4,6 +4,8 @@ import java.util.Objects;
 
 /**
  * This class represent a point object.
+ * @autor Ori perlmutter, Eytan Kantman
+ *
  */
 public class Point {
     final Double3 xyz;
@@ -91,4 +93,5 @@ public class Point {
     public Vector subtract(Point point){
         return new Vector(xyz.subtract(point.xyz));
     }
+
 }

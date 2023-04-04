@@ -2,16 +2,20 @@ package geometries;
 
 import primitives.Point;
 import primitives.Vector;
-/**
 
- The Plane class represents a plane in 3D space, defined by a point on the plane and a normal vector to the plane.
- The plane can also be defined by three non-collinear points in space.
+import static primitives.Util.isZero;
+
+/**
+ * The Plane class represents a plane in 3D space, defined by a point on the plane and a normal vector to the plane.
+ * The plane can also be defined by three non-collinear points in space.
  */
 public class Plane {
     Point q0;
     Vector normal;
+
     /**
      * Constructs a plane by a point on the plane and a normal vector to the plane.
+     *
      * @param q0     A point on the plane.
      * @param normal A normal vector to the plane.
      */
@@ -19,6 +23,7 @@ public class Plane {
         this.q0 = q0;
         this.normal = normal.normalize();
     }
+
     /**
      * Constructs a plane by three non-collinear points in space By creating 2 vectors on it and calc their cross product vector
      * @param p1 A point on the plane.
@@ -33,18 +38,24 @@ public class Plane {
         this.normal = nV.normalize();
         this.q0 = p2;
     }
+
     /**
      * Returns the normal vector to the plane.
      */
-    public Vector getNormal(){
+    public Vector getNormal() {
         return normal.normalize();
     }
+
     /**
      * Returns the normal vector to the plane at a specific point.
      * @param point The point at which the normal vector is requested.
      * @return The normal vector to the plane.
      */
-    public Vector getNormal(Point point){
+    //since the normal vector of a plane is orthogonal to the plane, it is the same at any point on the plane
+    public Vector getNormal(Point point) {
+        //if point is not on the plane, throw exception
+        if (!isZero((getNormal()).dotProduct(point.subtract(q0))))
+            throw new IllegalArgumentException("Point is not on the plane");
         return normal.normalize();
     }
 }

@@ -2,9 +2,9 @@ package geometries;
 
 import primitives.Point;
 /**
-
  The Triangle class represents a two-dimensional polygon with three vertices in a three-dimensional Cartesian coordinate system.
  This class extends the Polygon class and is defined by three Point objects that represent the three vertices of the triangle.
+ * @autor Ori perlmutter, Eytan Kantman
  */
 public class Triangle extends Polygon {
     /**

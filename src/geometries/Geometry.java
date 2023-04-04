@@ -6,7 +6,7 @@ import primitives.Vector;
 /**
  * The class uses as an interface, we chose to make it abstract class, because polygon extends it, and it cant extend an interface
  */
-public abstract class Geometry {
+public interface Geometry {
     /**
      * Abstract method for getting the normal vector to a geometry at a given point
      * @param point The point on the geometry for which to get the normal vector

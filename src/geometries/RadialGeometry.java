@@ -10,7 +10,10 @@ public abstract class RadialGeometry {
      * Constructs a new RadialGeometry object with the given radius.
      * @param radius the radius of the RadialGeometry object.
      */
-    public RadialGeometry(double radius) {
+    public RadialGeometry(double radius)
+    {
+        if (radius <= 0)
+            throw new IllegalArgumentException("Radius cannot be negative or zero");
         this.radius = radius;
     }
     /**
