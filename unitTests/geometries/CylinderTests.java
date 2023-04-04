@@ -21,6 +21,13 @@ class CylinderTests {
 
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test that the getNormal function works correctly
+        assertTrue(c1.getNormal(new Point(1, 1, 0)).equals(new Vector(0, 1, 0)));
+        assertTrue(c1.getNormal(new Point(2, 0,1 )).equals(new Vector(0, 0, 1)));
+        assertTrue(c1.getNormal(new Point(2, 1, 0)).equals(new Vector(0, 1, 0)));
+        assertTrue(c1.getNormal(new Point(-2, 1, 0)).equals(new Vector(0, 1, 0)));
+        assertTrue(c2.getNormal(new Point(2, 5, 1)).equals(new Vector(0, 1, 0)));
+        assertTrue(c2.getNormal(new Point(3, 1, 5)).equals(new Vector(0, 0, 1)));
+        assertTrue(c2.getNormal(new Point(3, 5, 1)).equals(new Vector(0, 1, 0)));
 
             // 2 TC’s on the bases (1 TC for each base)
 
@@ -32,6 +39,8 @@ class CylinderTests {
      //   assertTrue(c1.getNormal(new Point(1, 0, 0)).equals(new Vector(0, -1, 0)));
       //  assertTrue(c2.getNormal(new Point(5, 1, 1)).equals(new Vector(0, 0, 1)));
 
+        assertTrue(c1.getNormal(new Point(0, 1, 0)).equals(new Vector(0, 1, 0)));
+        assertTrue(c1.getNormal(new Point(0,0,1)).equals(new Vector(0, 0, 1)));
         // Test normal to the center of the top base
         assertTrue(c1.getNormal(new Point(0, 0, 0)).equals(new Vector(1, 0, 0)));
         assertTrue(c2.getNormal(new Point(1, 5, 1)).equals(new Vector(1, 0, 0)));
@@ -39,5 +48,6 @@ class CylinderTests {
         // Test normal to the center of the bottom base
         assertTrue(c1.getNormal(new Point(0, 0, 5)).equals(new Vector(1, 0, 0)));
         assertTrue(c2.getNormal(new Point(6, 1, 1)).equals(new Vector(1, 0, 0)));
+        
     }
     }
