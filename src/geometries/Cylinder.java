@@ -40,10 +40,9 @@ public class Cylinder extends Tube {
     }
 
     /**
-     * Return the normal when we will implement is.
+     * Return the normal Using tube's getNormal function, because we presume that point is on the cylinder
      */
     public Vector getNormal(Point point) {
-
         return super.getNormal(point);
     }
 }

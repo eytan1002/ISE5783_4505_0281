@@ -7,7 +7,7 @@ import static primitives.Util.isZero;
 
 /**
  * Testing Vector Class
- * * @author Ori Perlmutter, Eitan Kaantman
+ * * @author Ori Perlmutter, Eitan Kantman
  */
 class VectorTests {
     Vector v1 = new Vector(1, 2, 3);
