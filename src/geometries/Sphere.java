@@ -28,13 +28,10 @@ public class Sphere extends RadialGeometry {
         return center;
     }
 
-    /**
-     * At the moment, it returns null.
-     * Calculates and returns the normal vector to the sphere at a given point
-     *
-     * @param point the point on the sphere to calculate the normal at
-     *              will @return the normal vector to the sphere at the given point
-     */
+
+    //      Calculates and returns the normal vector to the sphere at a given point
+//      @param point the point on the sphere to calculate the normal at
+//                   will @return the normal vector to the sphere at the given point
     public Vector getNormal(Point point) {
         return point.subtract(center).normalize();
     }

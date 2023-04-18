@@ -9,7 +9,6 @@ import static primitives.Util.isZero;
 
 /**
  * A class representing a cylinder in 3D space, extending the Tube class.
- * <p> ori perlmutter
  * The cylinder is defined by its radius, axis ray and height.
  */
 public class Cylinder extends Tube {
@@ -39,9 +38,6 @@ public class Cylinder extends Tube {
         return height;
     }
 
-    /**
-     * Return the normal Using tube's getNormal function, because we presume that point is on the cylinder
-     */
     public Vector getNormal(Point point) {
         return super.getNormal(point);
     }

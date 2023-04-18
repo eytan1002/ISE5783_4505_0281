@@ -26,6 +26,7 @@ public class Plane {
 
     /**
      * Constructs a plane by three non-collinear points in space By creating 2 vectors on it and calc their cross product vector
+     *
      * @param p1 A point on the plane.
      * @param p2 A second point on the plane.
      * @param p3 A third point on the plane.
@@ -39,18 +40,12 @@ public class Plane {
         this.q0 = p2;
     }
 
-    /**
-     * Returns the normal vector to the plane.
-     */
+    // getting the plane's normal
     public Vector getNormal() {
         return normal.normalize();
     }
 
-    /**
-     * Returns the normal vector to the plane at a specific point.
-     * @param point The point at which the normal vector is requested.
-     * @return The normal vector to the plane.
-     */
+    //@param point The point at which the normal vector is requested.
     //since the normal vector of a plane is orthogonal to the plane, it is the same at any point on the plane
     public Vector getNormal(Point point) {
         //if point is not on the plane, throw exception
