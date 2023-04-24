@@ -94,4 +94,7 @@ public class Point {
         return new Vector(xyz.subtract(point.xyz));
     }
 
+    public double getX() {
+        return xyz.d1;
+    }
 }

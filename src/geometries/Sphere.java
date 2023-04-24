@@ -2,7 +2,10 @@
 package geometries;
 
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 /**
  * Represents a sphere in 3D space using its radius and center point
@@ -37,5 +40,29 @@ public class Sphere extends RadialGeometry {
 //                   will @return the normal vector to the sphere at the given point
     public Vector getNormal(Point point) {
         return point.subtract(center).normalize();
+    }
+
+
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+        Vector L = center.subtract(ray.getP0());
+        double tm = L.dotProduct(ray.getDir());
+        double d = Math.sqrt(L.lengthSquared() - tm * tm);
+        if (d > getRadius())
+            return null;
+        double th = Math.sqrt(getRadius() * getRadius() - d * d);
+        double t1 = tm - th;
+        double t2 = tm + th;
+        if (t1 <= 0 && t2 <= 0)
+            return null;
+        Vector vec1 = ray.getDir().scale(t1);
+        Vector vec2 = ray.getDir().scale(t2);
+        Point p1 = ray.getP0().add(vec1);
+        Point p2 = ray.getP0().add(vec2);
+        if (t1 <= 0)
+            return List.of(p2);
+        if (t2 <= 0)
+            return List.of(p1);
+        return List.of(p1, p2);
     }
 }

@@ -3,7 +3,10 @@
 package geometries;
 
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 import static primitives.Util.isZero;
 
@@ -12,7 +15,7 @@ import static primitives.Util.isZero;
  * The plane can also be defined by three non-collinear points in space.
  * @author Ori Perlmutter, Eitan Kaantman
  */
-public class Plane {
+public class Plane implements Geometry {
     Point q0;
     Vector normal;
 
@@ -55,6 +58,12 @@ public class Plane {
         if (!isZero((getNormal()).dotProduct(point.subtract(q0))))
             throw new IllegalArgumentException("Point is not on the plane");
         return normal.normalize();
+    }
+
+
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+        return null;
     }
 }
 
