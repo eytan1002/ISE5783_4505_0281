@@ -1,14 +1,13 @@
+
+
 package geometries;
 
+import org.junit.jupiter.api.Test;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
-import org.junit.jupiter.api.Test;
-
-import static primitives.Util.isZero;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Testing Cylinder Class
@@ -21,35 +20,30 @@ class CylinderTests {
      */
     @Test
     void TestGetNormal() {
-
-        Cylinder c1 = new Cylinder(1, new Ray(new Vector(1, 0, 0), new Point(0, 0, 0)), 5);
-        Cylinder c2 = new Cylinder(4, new Ray(new Vector(1, 0, 0), new Point(1, 1, 1)), 5);
-
+        Cylinder cyl = new Cylinder(1.0, new Ray(new Vector(0, 1, 0), new Point(0, 0, 1)), 1d);
         // ============ Equivalence Partitions Tests ==============
-        // TC01: Test that the getNormal function works correctly
-        assertTrue(c1.getNormal(new Point(1, 1, 0)).equals(new Vector(0, 1, 0)));
-        assertTrue(c1.getNormal(new Point(2, 0, 1)).equals(new Vector(0, 0, 1)));
-        assertTrue(c1.getNormal(new Point(2, 1, 0)).equals(new Vector(0, 1, 0)));
-        assertTrue(c1.getNormal(new Point(-2, 1, 0)).equals(new Vector(0, 1, 0)));
-        assertTrue(c2.getNormal(new Point(2, 5, 1)).equals(new Vector(0, 1, 0)));
-        assertTrue(c2.getNormal(new Point(3, 1, 5)).equals(new Vector(0, 0, 1)));
-        assertTrue(c2.getNormal(new Point(3, 5, 1)).equals(new Vector(0, 1, 0)));
+        // TC01: Point at a side of the cylinder
+        assertEquals(new Vector(0, 0, 1), cyl.getNormal(new Point(0, 0.5, 2)), "Bad normal to cylinder");
 
+        // TC02: Point at a 1st base of the cylinder
+        assertEquals(new Vector(0, 1, 0), cyl.getNormal(new Point(0, 0, 1.5)), "Bad normal to lower base of cylinder");
+
+        // TC03: Point at a 2nd base of the cylinder
+        assertEquals(new Vector(0, 1, 0), cyl.getNormal(new Point(0, 1, 0.5)), "Bad normal to upper base of cylinder");
 
         // =============== Boundary Values Tests ==================
+        // TC11: Point at the center of 1st base
+        assertEquals(new Vector(0, 1, 0), cyl.getNormal(new Point(0, 0, 1)), "Bad normal to center of lower base");
 
-        // Test normal to the base edge (force decision which normal to use)
-        assertThrows(IllegalArgumentException.class, () -> c1.getNormal(new Point(1, 0, 0)));
-        assertThrows(IllegalArgumentException.class, () -> c2.getNormal(new Point(5, 1, 1)));
+        // TC12: Point at the center of 2nd base
+        assertEquals(new Vector(0, 1, 0), cyl.getNormal(new Point(0, 1, 1)), "Bad normal to center of upper base");
 
-        assertTrue(c1.getNormal(new Point(0, 1, 0)).equals(new Vector(0, 1, 0)));
-        assertTrue(c1.getNormal(new Point(0, 0, 1)).equals(new Vector(0, 0, 1)));
-        // Test normal to the center of the top base
-        assertThrows(IllegalArgumentException.class, () -> c1.getNormal(new Point(0, 0, 0)));
-        assertTrue(c2.getNormal(new Point(1, 5, 1)).equals(new Vector(0, 1, 0)));
+        // TC13: Point at the edge with 1st base
+        assertEquals(new Vector(0, 1, 0), cyl.getNormal(new Point(0, 0, 2)), "Bad normal to edge with lower base");
 
-        // Test normal to the center of the bottom base
-        assertTrue(c1.getNormal(new Point(0, 0, 5)).equals(new Vector(0, 0, 1)));
-        assertThrows(IllegalArgumentException.class, () -> c2.getNormal(new Point(6, 1, 1)));
+        // TC14: Point at the edge with 2nd base
+        assertEquals(new Vector(0, 1, 0), cyl.getNormal(new Point(0, 1, 2)), "Bad normal to edge with upper base");
+
     }
+
 }

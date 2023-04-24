@@ -29,3 +29,4 @@ public class SphereTests {
         assertTrue(s2.getNormal(new Point(1, 0, 1)).equals(new Vector(0, -1, 0)));
     }
 }
+

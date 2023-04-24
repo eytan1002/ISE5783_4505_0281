@@ -1,3 +1,5 @@
+
+
 package geometries;
 
 import primitives.Point;
@@ -10,6 +12,8 @@ import static primitives.Util.isZero;
 /**
  * This class represents a tube in 3D space.
  * A tube is defined by its radius and an axis ray.
+ *
+ * @author Ori Perlmutter, Eitan Kaantman
  */
 public class Tube extends RadialGeometry {
     Ray axisRay;
@@ -50,3 +54,4 @@ public class Tube extends RadialGeometry {
     }
 
 }
+

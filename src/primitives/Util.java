@@ -1,8 +1,9 @@
+
 package primitives;
 
 /**
  * Util class is used for some internal utilities, e.g. controlling accuracy
- * 
+ *
  * @author Dan
  */
 public abstract class Util {
@@ -12,7 +13,8 @@ public abstract class Util {
 	/**
 	 * Empty private constructor to hide the public one
 	 */
-	private Util() {}
+	private Util() {
+	}
 
 	// double store format (bit level):
 	//    seee eeee eeee (1.)mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -29,16 +31,17 @@ public abstract class Util {
 
 	/**
 	 * Checks whether the number is [almost] zero
-	 * 
+	 *
 	 * @param number the number to check
 	 * @return true if the number is zero or almost zero, false otherwise
 	 */
 	public static boolean isZero(double number) {
 		return getExp(number) < ACCURACY;
 	}
+
 	/**
 	 * Aligns the number to zero if it is almost zero
-	 * 
+	 *
 	 * @param number the number to align
 	 * @return 0.0 if the number is very close to zero, the number itself otherwise
 	 */
@@ -48,7 +51,7 @@ public abstract class Util {
 
 	/**
 	 * Check whether two numbers have the same sign
-	 * 
+	 *
 	 * @param n1 1st number
 	 * @param n2 2nd number
 	 * @return true if the numbers have the same sign
@@ -59,7 +62,7 @@ public abstract class Util {
 
 	/**
 	 * Provide a real random number in range between min and max
-	 * 
+	 *
 	 * @param min value (included)
 	 * @param max value (excluded)
 	 * @return the random value

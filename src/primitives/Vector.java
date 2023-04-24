@@ -3,6 +3,8 @@ package primitives;
 /**
  * The Vector class represents a mathematical vector in 3D space.
  * It is a subclass of the Point class and inherits its xyz field.
+ *
+ * @author Ori Perlmutter, Eitan Kaantman
  */
 public class Vector extends Point {
     /**
@@ -64,6 +66,7 @@ public class Vector extends Point {
      * @throws IllegalArgumentException if the resulting vector is Vector(0,0,0)
      */
     public Vector add(Vector vector) {
+        // make sure the resulting vector is not Vector(0,0,0)
         if (this.xyz.d1 == -vector.xyz.d1 && this.xyz.d2 == -vector.xyz.d2 && this.xyz.d3 == -vector.xyz.d3)
             throw new IllegalArgumentException("Vector cannot be Vector(0,0,0)");
         return new Vector(xyz.add(vector.xyz));
@@ -76,7 +79,7 @@ public class Vector extends Point {
      * @throws IllegalArgumentException if the resulting vector is Vector(0,0,0)
      */
     public Vector scale(double d) {
-        if (d == 0)
+        if (d == 0) // make sure the resulting vector is not Vector(0,0,0)
             throw new IllegalArgumentException("Vector cannot be Vector(0,0,0)");
         return new Vector(xyz.scale(d));
     }

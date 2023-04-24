@@ -1,3 +1,4 @@
+
 package geometries;
 
 import primitives.Point;
@@ -5,6 +6,8 @@ import primitives.Vector;
 
 /**
  * Represents a sphere in 3D space using its radius and center point
+ *
+ * @author Ori Perlmutter, Eitan Kaantman
  */
 
 public class Sphere extends RadialGeometry {

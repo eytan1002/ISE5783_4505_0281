@@ -1,3 +1,4 @@
+
 package geometries;
 
 import primitives.Point;
@@ -76,6 +77,3 @@ class PlaneTests {
                 () -> plane.getNormal(notOnPlane), "Plane's getNormal does not throw an exception when the point is not on the plane");
     }
 }
-
-
-

@@ -1,3 +1,5 @@
+
+
 package geometries;
 
 import primitives.Point;
@@ -8,6 +10,7 @@ import static primitives.Util.isZero;
 /**
  * The Plane class represents a plane in 3D space, defined by a point on the plane and a normal vector to the plane.
  * The plane can also be defined by three non-collinear points in space.
+ * @author Ori Perlmutter, Eitan Kaantman
  */
 public class Plane {
     Point q0;
@@ -54,3 +57,4 @@ public class Plane {
         return normal.normalize();
     }
 }
+
