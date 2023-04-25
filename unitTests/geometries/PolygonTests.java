@@ -1,17 +1,17 @@
 package geometries;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static primitives.Util.isZero;
 
 import org.junit.jupiter.api.Test;
 
 import geometries.Polygon;
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 /**
  * Testing Polygons
@@ -91,4 +91,43 @@ public class PolygonTests {
             assertTrue(isZero(result.dotProduct(pts[i].subtract(pts[i == 0 ? 3 : i - 1]))),
                     "Polygon's normal is not orthogonal to one of the edges");
     }
+
+    /**
+     * Test method for {@link geometries.Polygon#findIntersections(primitives.Ray)}.
+     */
+    // decided to use the same test as in the triangle, since the polygon could be a triangle
+    @Test
+    public void FindIntersections() {
+        // assuming the ray intersects the plane of the polygon
+        Polygon polygon = new Polygon(new Point(0, 1, -1), new Point(0, 3, -3), new Point(1, 2, -2));
+        // ============ Equivalence Partitions Tests ==============
+        //TC01: Ray intersects the triangle's plane (1 point)
+        Point p1 = new Point(0.5, 2, -2);
+        Ray ray1 = new Ray(new Vector(1, 1, 1), p1);
+        assertEquals(List.of(p1), polygon.findIntersections(ray1), "Ray crosses triangle at one place");
+        //TC02: Ray does not intersect the triangle's plane. against edge (0 points)
+        Point p2 = new Point(4, 5, 3);
+        Ray ray2 = new Ray(new Vector(1, 1, 1), p2);
+        assertNull(polygon.findIntersections(ray2), "Ray  uncrosses triangle");
+        //TC03: Ray does not intersect the triangle's plane. against vertex (0 points)
+        Point p3 = new Point(2, 3, 1);
+        Ray ray3 = new Ray(new Vector(1, 1, 1), p3);
+        assertNull(polygon.findIntersections(ray3), "Ray uncrosses triangle");
+        // ================== Boundary Values Tests ==================
+        //TC04: Ray starts before and crosses the triangle in vertex (0 points)
+        Point p4 = new Point(-1, 0, -2);
+        Ray ray4 = new Ray(new Vector(1, 1, 1), p4);
+        assertNull(polygon.findIntersections(ray4), "Ray uncrosses triangle");
+        //TC05: Ray starts before and crosses the triangle in edge (0 points)
+        Point p5 = new Point(-1, 1, -3);
+        Ray ray5 = new Ray(new Vector(1, 1, 1), p5);
+        assertNull(polygon.findIntersections(ray5), "Ray uncrosses triangle");
+        //TC06: Ray starts before and crosses the triangle in edge's continuation (0 points)
+        Point p6 = new Point(-1, 5, -5);
+        Ray ray6 = new Ray(new Vector(1, 1, 1), p6);
+        assertNull(polygon.findIntersections(ray6), "Ray uncrosses triangle");
+
+    }
+
+
 }
