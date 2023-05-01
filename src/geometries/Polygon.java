@@ -94,8 +94,44 @@ public class Polygon implements Geometry {
       return plane.getNormal();
    }
 
+   // We used the barycentric coordinates method to check if a point is inside a polygon.
    @Override
    public List<Point> findIntersections(Ray ray) {
+      // check if the ray intersects the plane of the polygon
+      Plane plane = new Plane(vertices.get(0), vertices.get(1), vertices.get(2));
+      if (plane.findIntersections(ray) ==null) return null;
+      // need to have list of intersections, as the barycentric coordinates method asks
+      List<Point> intersections = plane.findIntersections(ray);
+              // there could be 1 intersection point with the plane, check if it is inside the polygon
+      Point point = intersections.get(0);
+      // Find the triangle in the polygon that contains the point
+      for (int i = 0; i < size - 2; i++) {
+         Point vertex1 = vertices.get(0);
+         Point vertex2 = vertices.get(i + 1);
+         Point vertex3 = vertices.get(i + 2);
+
+         // Calculate the barycentric coordinates of the point with respect to the triangle
+         double w1 = ((vertex2.getY() - vertex3.getY()) * (point.getX() - vertex3.getX()) +
+                 (vertex3.getX() - vertex2.getX()) * (point.getY() - vertex3.getY())) /
+                 ((vertex2.getY() - vertex3.getY()) * (vertex1.getX() - vertex3.getX()) +
+                         (vertex3.getX() - vertex2.getX()) * (vertex1.getY() - vertex3.getY()));
+
+         double w2 = ((vertex3.getY() - vertex1.getY()) * (point.getX() - vertex3.getX()) +
+                 (vertex1.getX() - vertex3.getX()) * (point.getY() - vertex3.getY())) /
+                 ((vertex2.getY() - vertex3.getY()) * (vertex1.getX() - vertex3.getX()) +
+                         (vertex3.getX() - vertex2.getX()) * (vertex1.getY() - vertex3.getY()));
+
+         double w3 = 1 - w1 - w2;
+
+         if (w1 > 0 && w2 > 0 && w3 > 0) {
+            // The point is inside the triangle (and therefore inside the polygon)
+            return List.of(point);
+         }
+      }
+      // The point is outside the polygon
       return null;
    }
+
+
+
 }

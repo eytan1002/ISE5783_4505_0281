@@ -1,8 +1,8 @@
-
 package geometries;
 
 import primitives.Point;
 import primitives.Ray;
+import primitives.Util;
 import primitives.Vector;
 
 import java.util.List;
@@ -45,24 +45,35 @@ public class Sphere extends RadialGeometry {
 
     @Override
     public List<Point> findIntersections(Ray ray) {
-        Vector L = center.subtract(ray.getP0());
-        double tm = L.dotProduct(ray.getDir());
-        double d = Math.sqrt(L.lengthSquared() - tm * tm);
-        if (d > getRadius())
+        // if the ray starts at the center of the sphere
+        double tm = 0;
+        double d = 0;
+        if (!center.equals(ray.getP0())){ // if the ray doesn't start at the center of the sphere
+            Vector L = center.subtract(ray.getP0());
+            tm = L.dotProduct(ray.getDir());
+            d =L.lengthSquared() - tm * tm; // d = (|L|^2 - tm^2)
+            if (d < 0)
+                d = -d;
+            d = Math.sqrt(d);
+        }
+        if (d > getRadius()) // if the ray doesn't intersect the sphere
             return null;
+        // computing the distance from the ray's start point to the intersection points
         double th = Math.sqrt(getRadius() * getRadius() - d * d);
         double t1 = tm - th;
         double t2 = tm + th;
         if (t1 <= 0 && t2 <= 0)
             return null;
-        Vector vec1 = ray.getDir().scale(t1);
-        Vector vec2 = ray.getDir().scale(t2);
-        Point p1 = ray.getP0().add(vec1);
-        Point p2 = ray.getP0().add(vec2);
-        if (t1 <= 0)
-            return List.of(p2);
-        if (t2 <= 0)
-            return List.of(p1);
-        return List.of(p1, p2);
+        if (Util.alignZero(t2) == 0) // if the ray is tangent to the sphere
+            return null;
+        if (th == 0)
+            return null;
+        if (t1 <= 0){ // if the ray starts inside the sphere or the ray starts after the sphere
+            return List.of(ray.findPoint(t2));
+        }
+        if (t2 <= 0) { //if the ray starts after the sphere
+            return List.of(ray.findPoint(t1));
+        }
+        return List.of(ray.findPoint(t1), ray.findPoint(t2)); // if the ray intersects the sphere twice
     }
 }

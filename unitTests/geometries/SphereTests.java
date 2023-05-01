@@ -82,12 +82,12 @@ public class SphereTests {
         List<Point> result3 = sphere.findIntersections(new Ray(new Vector(1, 1, 1), new Point(0, -1, -1)
         ));
         assertEquals(2, result3.size(), "Wrong number of points");
-               if (result3.get(0).getX() > result3.get(1).getX())
+        if (result3.get(0).getX() > result3.get(1).getX())
             result3 = List.of(result3.get(1), result3.get(0));
         assertEquals(List.of(p5, p6), result3, "Ray crosses sphere");
 
         // TC14: Ray starts at sphere and goes inside (1 points)
-        Point p7 = new Point(2,0, 0);
+        Point p7 = new Point(0,0, 0);
         List<Point> resultC2 = sphere.findIntersections(new Ray(new Vector(-1, 0, 0), new Point(2, 0, 0)
         ));
         assertEquals(1, resultC2.size(), "Wrong number of points");
@@ -101,7 +101,7 @@ public class SphereTests {
         assertEquals(List.of(p8), resultC3, "Ray crosses sphere on 1 point");
 
         // TC16: Ray starts at the center (1 points)
-        Point p9 = new Point(1.047511433814558, 0.997740110105718, -0.047511433814558);
+        Point p9 = new Point(1.047511433814558, 0.997740110105718, 0.04751143381455799);
         List<Point> resultC4 = sphere.findIntersections(new Ray(new Vector(1, 21, 1), new Point(1, 0, 0)
         ));
         assertEquals(1, resultC4.size(), "Wrong number of points");
@@ -128,11 +128,10 @@ public class SphereTests {
                 "Ray's line out of sphere");
 
         // **** Group: Special cases
-        // TC19: Ray's line is outside, ray is orthogonal to ray start to sphere's center line
+        // TC22: Ray's line is outside, ray is orthogonal to ray start to sphere's center line
         Point p_o = new Point(3,1,1);
         Vector cToP = p_o.subtract(sphere.center);// (0,1,0) is orthogonal.
         assertNull(sphere.findIntersections(new Ray(new Vector(0, 1, 0), p_o)),
                 "Ray's line out of sphere");
     }
 }
-

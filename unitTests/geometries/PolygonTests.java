@@ -102,10 +102,10 @@ public class PolygonTests {
         Polygon polygon = new Polygon(new Point(0, 1, -1), new Point(0, 3, -3), new Point(1, 2, -2));
         // ============ Equivalence Partitions Tests ==============
         //TC01: Ray intersects the triangle's plane (1 point)
-        Point p1 = new Point(0.5, 2, -2);
-        Ray ray1 = new Ray(new Vector(1, 1, 1), p1);
+        Point p1 = new Point(0.7, 2, -2);
+        Ray ray1 = new Ray(new Vector(1,1,1), new Point(-3.3,-2,-6));
         assertEquals(List.of(p1), polygon.findIntersections(ray1), "Ray crosses triangle at one place");
-        //TC02: Ray does not intersect the triangle's plane. against edge (0 points)
+        //TC02: Ray does not intersect the Polygon's plane. against edge (0 points)
         Point p2 = new Point(4, 5, 3);
         Ray ray2 = new Ray(new Vector(1, 1, 1), p2);
         assertNull(polygon.findIntersections(ray2), "Ray  uncrosses triangle");
@@ -115,7 +115,7 @@ public class PolygonTests {
         assertNull(polygon.findIntersections(ray3), "Ray uncrosses triangle");
         // ================== Boundary Values Tests ==================
         //TC04: Ray starts before and crosses the triangle in vertex (0 points)
-        Point p4 = new Point(-1, 0, -2);
+        Point p4 = new Point(0, 1, -3);
         Ray ray4 = new Ray(new Vector(1, 1, 1), p4);
         assertNull(polygon.findIntersections(ray4), "Ray uncrosses triangle");
         //TC05: Ray starts before and crosses the triangle in edge (0 points)

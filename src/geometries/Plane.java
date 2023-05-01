@@ -1,5 +1,3 @@
-
-
 package geometries;
 
 import primitives.Point;
@@ -60,10 +58,23 @@ public class Plane implements Geometry {
         return normal.normalize();
     }
 
-
     @Override
     public List<Point> findIntersections(Ray ray) {
+
+        // if the ray and plane are parallel (i.e., dot product between their normal vectors is 0),
+        // then there is no intersection between them
+        double denominator = this.getNormal().dotProduct(ray.getDir());
+        if (isZero(denominator)) {
+            return null;
+        }
+        // if the ray's starting point is on the plane, then the ray not intersects the plane at the starting point
+        if (q0.equals(ray.getP0()))
+            return null;
+        // t represents the distance between the ray's starting point and the intersection point
+        double t = (this.getNormal().dotProduct(q0.subtract(ray.getP0()))) / denominator;
+        if (t > 0) {
+            return List.of(ray.findPoint(t));
+        }
         return null;
     }
 }
-

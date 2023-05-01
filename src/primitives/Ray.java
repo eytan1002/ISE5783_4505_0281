@@ -1,4 +1,3 @@
-
 package primitives;
 
 /**
@@ -56,4 +55,9 @@ public class Ray {
     public String toString() {
         return p0.toString() + dir.toString();
     }
+    public Point findPoint(double d){
+        return this.p0.add(this.dir.scale(d));
+    }
+
+
 }
