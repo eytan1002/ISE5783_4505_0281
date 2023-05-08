@@ -1,5 +1,3 @@
-
-
 package geometries;
 
 import primitives.Point;
@@ -56,7 +54,8 @@ public class Tube extends RadialGeometry {
     }
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<Point> findIntersections(Ray ray)
+    {
         return null;
     }
 

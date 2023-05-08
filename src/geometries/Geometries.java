@@ -3,10 +3,7 @@ package geometries;
 import primitives.Point;
 import primitives.Ray;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * The class represents a collection of geometry shapes, and it implements the Intersectable interface.
@@ -27,16 +24,17 @@ public class Geometries implements Intersectable {
      * @param geometries The geometries to add to the geometries list.
      */
     public Geometries(Intersectable... geometries) {
-        this.geometries = new ArrayList<Intersectable>(Arrays.asList(geometries));
+        this();
+        add(geometries);
     }
 
     /**
      * Adds a geometry to the geometries list.
      *
-     * @param geometry The geometry to add to the geometries list.
+     * @param geometries The geometric objects to add to the geometries list.
      */
-    public void add(Intersectable geometry) {
-        geometries.add(geometry);
+    public void add(Intersectable... geometries) {
+        Collections.addAll(this.geometries, geometries);
     }
 
     /**
@@ -46,22 +44,17 @@ public class Geometries implements Intersectable {
     @Override
     public List<Point> findIntersections(Ray ray) {
         //if there are no intersections return null
-        boolean isIntersect = false;
-        for (Intersectable geometry : geometries) {
-            if (geometry.findIntersections(ray) != null) {
-                isIntersect = true;
-                break;
+        List<Point> result = new LinkedList<>();
+        for (Intersectable geo : geometries) {
+            List<Point> temp = geo.findIntersections(ray);
+            if (temp != null) {
+                result.addAll(temp);
             }
         }
-        if (!isIntersect)
+        if (result.isEmpty()) {
             return null;
-        //if there are intersections, return a list of all the intersections
-        List<Point> intersections = new LinkedList<Point>();
-        for (Intersectable geometry : geometries) {
-            if (geometry.findIntersections(ray) != null)
-                intersections.addAll(geometry.findIntersections(ray));
         }
-        return intersections;
+        return result;
     }
 
 

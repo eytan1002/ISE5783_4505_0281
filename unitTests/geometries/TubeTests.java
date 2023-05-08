@@ -18,8 +18,8 @@ class TubeTests {
     void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: There is a simple single test here
-        Tube t1 = new Tube(1, new Ray(new Vector(1,0,0) , new Point(0,0,0)));
-        Tube t2 = new Tube(4, new Ray(new Vector(1,0,0) , new Point(1,1,1)));
+        Tube t1 = new Tube(1, new Ray(new Point(0,0,0),new Vector(1,0,0)  ));
+        Tube t2 = new Tube(4, new Ray(new Point(1,1,1),new Vector(1,0,0) ));
         assertTrue(t1.getNormal(new Point(1, 1, 0)).equals(new Vector(0, 1, 0)));
         assertTrue(t1.getNormal(new Point(2, 0,1 )).equals(new Vector(0, 0, 1)));
         assertTrue(t1.getNormal(new Point(2, 1, 0)).equals(new Vector(0, 1, 0)));

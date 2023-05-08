@@ -15,11 +15,10 @@ public class Ray {
      * @param v the direction vector of the ray, which gets normalized
      * @param p the starting point of the ray
      */
-    public Ray(Vector v, Point p) {
+    public Ray(Point p, Vector v) {
         dir = v.normalize();
         p0 = p;
     }
-
     /**
      * Returns the starting point of the ray.
      */
@@ -41,11 +40,11 @@ public class Ray {
      * @return true if the objects are equal, false otherwise
      */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj instanceof Ray other)
-            return this.p0.xyz.equals(other.p0) && this.dir.equals(other.dir);
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ray ray = (Ray) o;
+        return p0.equals(ray.p0) && dir.equals(ray.dir);
     }
 
     /**

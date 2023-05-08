@@ -89,33 +89,33 @@ class PlaneTests {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Ray intersects the plane (1 point)
         Point p1 = new Point(0.23076923076923073, 0.46153846153846145, 1.2307692307692308); //around
-        Ray ray1 = new Ray(new Vector(1, 2, 1), new Point(0, 0, 1));
+        Ray ray1 = new Ray(new Point(0, 0, 1),new Vector(1, 2, 1) );
         assertEquals(List.of(p1), plane.findIntersections(ray1), "Ray crosses plane at one place");
         // TC02: Ray does not intersect the plane (0 points)
-        Ray ray2 = new Ray(new Vector(-1, -2, -1), new Point(-3, 5, -3));
+        Ray ray2 = new Ray(new Point(-3, 5, -3),new Vector(-1, -2, -1) );
         assertNull(plane.findIntersections(ray2), "Wrong number of points");
         // =============== Boundary Values Tests ==================
         // TC03: Ray is parallel to the plane, and on the plane (0 points)
-        Ray ray3 = new Ray(new Vector(2, -1, 0), new Point(1, 1, 1));
+        Ray ray3 = new Ray(new Point(1, 1, 1),new Vector(2, -1, 0) );
         assertNull(plane.findIntersections(ray3), "Ray's line has no intersection with the plane");
         // TC04: Ray is parallel to the plane, and not on the plane (0 points)
-        Ray ray4 = new Ray(new Vector(2, -1, 0), new Point(0, 0, 1));
+        Ray ray4 = new Ray(new Point(0, 0, 1),new Vector(2, -1, 0) );
         assertNull(plane.findIntersections(ray4), "Ray's line has no intersection with the plane");
         // TC05: Ray is orthogonal to the plane, and on the plane (0 points)
-        Ray ray5 = new Ray(new Vector(1, 2, 8), new Point(1, 1, 1));
+        Ray ray5 = new Ray(new Point(1, 1, 1),new Vector(1, 2, 8) );
         assertNull(plane.findIntersections(ray5), "Ray's line has no intersection with the plane");
         // TC06: Ray is orthogonal to the plane, and before the plane (1 point)
         Point p2 = new Point(0.043478260869565216, 0.08695652173913043, 1.3478260869565217);
-        Ray ray6 = new Ray(new Vector(1, 2, 8), new Point(0, 0, 1));
+        Ray ray6 = new Ray(new Point(0, 0, 1),new Vector(1, 2, 8) );
         assertEquals(List.of(p2), plane.findIntersections(ray6), "Ray crosses plane at one place");
         // TC07: Ray is orthogonal to the plane, and after the plane (0 points)
-        Ray ray7 = new Ray(new Vector(1, 2, 8), new Point(2, 2, 2));
+        Ray ray7 = new Ray( new Point(2, 2, 2),new Vector(1, 2, 8));
         assertNull(plane.findIntersections(ray7), "Ray's line has no intersection with the plane");
         // TC08: Ray is neither orthogonal nor parallel to and begins at the plane (0 points)
-        Ray ray8 = new Ray(new Vector(2, 3, 2), new Point(1, 1, 1));
+        Ray ray8 = new Ray(new Point(1, 1, 1),new Vector(2, 3, 2) );
         assertNull(plane.findIntersections(ray8), "Ray's line has no intersection with the plane");
         // TC09: Ray is neither orthogonal nor parallel to the plane and begins in the same point which appears as reference point in the plane (0 points)
-        Ray ray9 = new Ray(new Vector(2, 4, 2), new Point(1, 1, 1));
+        Ray ray9 = new Ray(new Point(1, 1, 1),new Vector(2, 4, 2) );
         assertNull(plane.findIntersections(ray9), "Ray's line has no intersection with the plane");
     }
 }
