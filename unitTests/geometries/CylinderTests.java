@@ -20,7 +20,7 @@ class CylinderTests {
      */
     @Test
     void TestGetNormal() {
-        Cylinder cyl = new Cylinder(1.0, new Ray(new Point(0, 0, 1),new Vector(0, 1, 0) ), 1d);
+        Cylinder cyl = new Cylinder(1.0, new Ray(new Point(0, 0, 1), new Vector(0, 1, 0)), 1d);
         // ============ Equivalence Partitions Tests ==============
         // TC01: Point at a side of the cylinder
         assertEquals(new Vector(0, 0, 1), cyl.getNormal(new Point(0, 0.5, 2)), "Bad normal to cylinder");

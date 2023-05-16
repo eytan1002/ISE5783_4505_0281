@@ -11,7 +11,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
+ * Integration tests of Camera Ray construction with Ray-Geometry intersections
  *
+ * @author Ori Perlmutter, Eitan Kaantman
  */
 
 class CameraIntegrationTest {
@@ -92,6 +94,7 @@ class CameraIntegrationTest {
         // TC04: Beyond Plane 0 points
         assertEquals(0, countIntersections(cam, new Plane(new Point(0, 0, -5), new Vector(0, -1, 0))));
     }
+
     /**
      * Integration tests of Camera Ray construction with Ray-Triangle intersections
      */

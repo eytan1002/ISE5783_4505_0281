@@ -103,28 +103,28 @@ public class PolygonTests {
         // ============ Equivalence Partitions Tests ==============
         //TC01: Ray intersects the triangle's plane (1 point)
         Point p1 = new Point(0.7, 2, -2);
-        Ray ray1 = new Ray(new Point(-3.3,-2,-6),new Vector(1,1,1) );
+        Ray ray1 = new Ray(new Point(-3.3, -2, -6), new Vector(1, 1, 1));
         assertEquals(List.of(p1), polygon.findIntersections(ray1), "Ray crosses triangle at one place");
         //TC02: Ray does not intersect the Polygon's plane. against edge (0 points)
         Point p2 = new Point(4, 5, 3);
-        Ray ray2 = new Ray(p2,new Vector(1, 1, 1));
+        Ray ray2 = new Ray(p2, new Vector(1, 1, 1));
         assertNull(polygon.findIntersections(ray2), "Ray  uncrosses triangle");
         //TC03: Ray does not intersect the triangle's plane. against vertex (0 points)
         Point p3 = new Point(2, 3, 1);
-        Ray ray3 = new Ray(p3,new Vector(1, 1, 1));
+        Ray ray3 = new Ray(p3, new Vector(1, 1, 1));
         assertNull(polygon.findIntersections(ray3), "Ray uncrosses triangle");
         // ================== Boundary Values Tests ==================
         //TC04: Ray starts before and crosses the triangle in vertex (0 points)
         Point p4 = new Point(0, 1, -3);
-        Ray ray4 = new Ray(p4,new Vector(1, 1, 1));
+        Ray ray4 = new Ray(p4, new Vector(1, 1, 1));
         assertNull(polygon.findIntersections(ray4), "Ray uncrosses triangle");
         //TC05: Ray starts before and crosses the triangle in edge (0 points)
         Point p5 = new Point(-1, 1, -3);
-        Ray ray5 = new Ray(p5,new Vector(1, 1, 1));
+        Ray ray5 = new Ray(p5, new Vector(1, 1, 1));
         assertNull(polygon.findIntersections(ray5), "Ray uncrosses triangle");
         //TC06: Ray starts before and crosses the triangle in edge's continuation (0 points)
         Point p6 = new Point(-1, 5, -5);
-        Ray ray6 = new Ray(p6,new Vector(1, 1, 1));
+        Ray ray6 = new Ray(p6, new Vector(1, 1, 1));
         assertNull(polygon.findIntersections(ray6), "Ray uncrosses triangle");
 
     }

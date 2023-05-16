@@ -1,5 +1,6 @@
 package renderer;
 
+import primitives.Color;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
@@ -12,11 +13,11 @@ import java.util.Random;
 import static primitives.Util.isZero;
 
 /**
-
- The Camera class represents a viewpoint of the geometric world through a view plane, which acts as a picture plane.
- The camera captures the geometric world and produces graphic views of objects using the view plane and ray-object intersections.
- The rays converge based on the location of the pixel centers on the view plane.
- The camera has directions to the right, up, and front (relative to the original x,y,z axis), all of which are orthogonal to each other.
+ * Camera class represents a camera in 3D Cartesian coordinate system
+ * with location and direction vectors
+ * and constructs rays through pixels on view plane
+ *
+ * @author: Eytan Kaantman & Ori Perlmutter
  */
 public class Camera {
     /**
@@ -55,6 +56,10 @@ public class Camera {
      */
     private double cHeight;
 
+    private ImageWriter imageWriter;
+
+    private RayTracerBase tracer;
+
     /**
      * @param p0  - camera location
      * @param vTo - X vector
@@ -71,6 +76,7 @@ public class Camera {
         this.vRight = this.vTo.crossProduct(this.vUp);// vRight is orthogonal to vTo and vUp. and points to the right side of the camera
     }
 
+
     /**
      * @param distance - distance from VP
      * @return the camera object after setting its distance from VP
@@ -79,6 +85,22 @@ public class Camera {
         this.cDistance = distance;
         return this;
 
+    }
+
+    public Camera setRayTracer(RayTracerBase tracer) {
+        this.tracer = tracer;
+        return this;
+    }
+
+    /**
+     * setter for imageWriter
+     *
+     * @param imageWriter
+     * @return the image writer for the camera
+     */
+    public Camera setImageWriter(ImageWriter imageWriter) {
+        this.imageWriter = imageWriter;
+        return this;
     }
 
     /**
@@ -90,8 +112,9 @@ public class Camera {
         this.cHeight = height;
         return this;
     }
+
     /**
-     * @param nX amount of columns - line's width
+     * @param nX amount of pixels in the horizontal
      * @param nY amount of lines - column's height
      * @param j  - pixel's line
      * @param i  - pixel's column
@@ -121,6 +144,71 @@ public class Camera {
 // Calculate the vector from the camera's eye in the direction of point (i,j) on the view plane
         Vector Vij = Pij.subtract(p0);
         return new Ray(p0, Vij);
+    }
+
+    /**
+     * checks if imageWriter and tracer are initialized
+     */
+    public void renderImage() {
+        //check all the parameters are initialized
+        if (imageWriter == null) {
+            throw new MissingResourceException("Missing resource", ImageWriter.class.getName(), "");
+        }
+        if (tracer == null) {
+            throw new MissingResourceException("Missing resource", RayTracerBase.class.getName(), "");
+        }
+        // iterate over all the pixels in the view plane
+        for (int i = 0; i < imageWriter.getNx(); i++) {
+            for (int j = 0; j < imageWriter.getNy(); j++) {
+                // construct a ray from the camera to the middle of the pixel
+                Color pixelColor = castRay(imageWriter.getNx(), imageWriter.getNy(), i, j);
+                // color the pixel with the color of the closest intersection point
+                imageWriter.writePixel(i, j, pixelColor);
+            }
+        }
+    }
+
+    /**
+     * Cast ray from camera in order to color a pixel
+     *
+     * @param nX   - resolution on X axis (number of pixels in row)
+     * @param nY   - resolution on Y axis (number of pixels in column)
+     * @param icol - pixel's column number (pixel index in row)
+     * @param jrow - pixel's row number (pixel index in column)
+     */
+    private Color castRay(int nX, int nY, int icol, int jrow) {
+        Ray ray = constructRay(nX, nY, icol, jrow);
+        return tracer.traceRay(ray);
+    }
+
+    /**
+     * the function prints a grid on the image
+     *
+     * @param interval - the interval between the lines
+     * @param color    - the color of the lines
+     */
+    public void printGrid(int interval, Color color) {
+        if (imageWriter == null) {
+            throw new MissingResourceException("Missing resource", ImageWriter.class.getName(), "");
+        }
+        // color the grid lines
+        for (int i = 0; i < imageWriter.getNx(); i++) {
+            for (int j = 0; j < imageWriter.getNy(); j++) {
+                if (i % interval == 0 || j % interval == 0) {
+                    imageWriter.writePixel(j, i, color);
+                }
+            }
+        }
+    }
+
+    /**
+     * writes the image to the file using the image writer class
+     */
+    public void writeToImage() {
+        if (imageWriter == null) {
+            throw new MissingResourceException("Missing resource", ImageWriter.class.getName(), "");
+        }
+        imageWriter.writeToImage();//delegate to image writer
     }
 
     public int getcDistance() {

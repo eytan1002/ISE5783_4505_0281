@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.List;
+
 /**
  * The Ray class represents a ray in 3D space, composed of a starting point p0 and a direction vector dir.
  *
@@ -19,6 +21,7 @@ public class Ray {
         dir = v.normalize();
         p0 = p;
     }
+
     /**
      * Returns the starting point of the ray.
      */
@@ -36,7 +39,7 @@ public class Ray {
     /**
      * Compares this ray to the specified object for equality.
      *
-     * @param obj the object to compare
+     * @param o the object to compare
      * @return true if the objects are equal, false otherwise
      */
     @Override
@@ -54,9 +57,28 @@ public class Ray {
     public String toString() {
         return p0.toString() + dir.toString();
     }
-    public Point findPoint(double d){
+
+    public Point findPoint(double d) {
         return this.p0.add(this.dir.scale(d));
     }
 
 
+    /**
+     * @param intersections, a list of intersections.
+     * @return the closest point to the ray's starting point, or null if the list is empty.
+     */
+        public Point findClosestPoint(List<Point> intersections) {
+        if (intersections == null || intersections.isEmpty())
+            return null;
+        //compute the distance between the ray's starting point and the first point in the list
+        double minDistance = intersections.get(0).distance(p0);
+        Point minPoint = intersections.get(0);
+        for (Point p : intersections) {
+            if (p.distance(p0) < minDistance) {
+                minDistance = p.distance(p0);
+                minPoint = p;
+            }
+        }
+        return minPoint;
+    }
 }

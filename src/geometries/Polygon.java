@@ -109,13 +109,17 @@ public class Polygon implements Geometry {
          Point vertex1 = vertices.get(0);
          Point vertex2 = vertices.get(i + 1);
          Point vertex3 = vertices.get(i + 2);
-
+      /*
+      Explaination of the barycentric coordinates method:
+        https://en.wikipedia.org/wiki/Barycentric_coordinate_system#Conversion_between_barycentric_and_Cartesian_coordinates
+       */
          // Calculate the barycentric coordinates of the point with respect to the triangle
+         //w1 = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
          double w1 = ((vertex2.getY() - vertex3.getY()) * (point.getX() - vertex3.getX()) +
                  (vertex3.getX() - vertex2.getX()) * (point.getY() - vertex3.getY())) /
                  ((vertex2.getY() - vertex3.getY()) * (vertex1.getX() - vertex3.getX()) +
                          (vertex3.getX() - vertex2.getX()) * (vertex1.getY() - vertex3.getY()));
-
+         //w2 = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
          double w2 = ((vertex3.getY() - vertex1.getY()) * (point.getX() - vertex3.getX()) +
                  (vertex1.getX() - vertex3.getX()) * (point.getY() - vertex3.getY())) /
                  ((vertex2.getY() - vertex3.getY()) * (vertex1.getX() - vertex3.getX()) +
@@ -131,7 +135,4 @@ public class Polygon implements Geometry {
       // The point is outside the polygon
       return null;
    }
-
-
-
 }
