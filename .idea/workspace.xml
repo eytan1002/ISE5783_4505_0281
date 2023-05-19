@@ -5,32 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b2d1496-0a75-4343-98c3-d8902f07fbe6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/lighting/AmbientLight.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/primitives/Color.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/ImageWriter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/RayTracerBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/scene/Scene.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/primitives/RayTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/renderer/ImageWriterTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/renderer/RenderTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ISE5783_4505_0281.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ISE5783_4505_0281.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Cylinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Cylinder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Polygon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Polygon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lighting/AmbientLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/AmbientLight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/primitives/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Ray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Ray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/geometries/CylinderTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/geometries/CylinderTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/geometries/GeometriesTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/geometries/GeometriesTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/geometries/PlaneTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/geometries/PlaneTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/geometries/PolygonTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/geometries/PolygonTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/geometries/SphereTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/geometries/SphereTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/geometries/TriangleTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/geometries/TriangleTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/geometries/TubeTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/geometries/TubeTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/primitives/PointTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/primitives/PointTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/renderer/CameraIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/CameraIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/renderer/CameraTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/CameraTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scene/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/renderer/RenderTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/RenderTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +59,7 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/USER/IdeaProjects/ISE5783_4505_0281/unitTests/renderer&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/USER/IdeaProjects/ISE5783_4505_0281/unitTests/geometries&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/USER/IdeaProjects/ISE5783_4505_0281/unitTests&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -86,7 +67,11 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="renderer" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\USER\IdeaProjects\ISE5783_4505_0281\unitTests" />
       <recent name="C:\Users\USER\IdeaProjects\ISE5783_4505_0281\unitTests\geometries" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -182,8 +167,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.RenderTests.basicRenderJson" />
-        <item itemvalue="JUnit.RenderTests.basicRenderTwoColorTest" />
         <item itemvalue="JUnit.RenderTests" />
+        <item itemvalue="JUnit.RenderTests.basicRenderTwoColorTest" />
         <item itemvalue="JUnit.All in ISE5783_4505_0281" />
         <item itemvalue="JUnit.RayTests" />
       </list>
@@ -268,7 +253,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1683529653097</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL‎-00011" summary="level 5 completed almost done with bonus">
+      <created>1684246072253</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL‎-00011" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1684246072253</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -293,7 +285,8 @@
     <MESSAGE value="need to implicit intersection method (using refactor method) and bonuses" />
     <MESSAGE value="Level 3 completed, yet to implement tube, cylinder" />
     <MESSAGE value="level 4 completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="level 4 completed" />
+    <MESSAGE value="level 5 completed almost done with bonus" />
+    <option name="LAST_COMMIT_MESSAGE" value="level 5 completed almost done with bonus" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

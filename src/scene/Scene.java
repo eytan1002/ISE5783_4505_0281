@@ -7,6 +7,12 @@ import primitives.Point;
 
 import java.util.List;
 
+/**
+ * class Scene is the class representing the scene to be rendered
+ * it contains the name of the scene, the background color, the ambient light and the geometries
+ * it has setters for each of the fields, returning the object itself
+ * @ author - Eytan Kantman and Ori Perlmuter
+ */
 public class Scene {
     public final String name;
     public Color background = Color.BLACK;
@@ -30,9 +36,6 @@ public class Scene {
         this.geometries = geometries;
         return this;
     }
-
-
-
 
 
 }

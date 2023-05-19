@@ -6,6 +6,10 @@ import scene.Scene;
 
 import java.util.List;
 
+/**
+ * RayTracerBasic is a basic ray tracer, it extends RayTracerBase and implements the traceRay function
+ * @ author - Eytan Kantman and Ori Perlmuter
+ */
 
 public class RayTracerBasic extends RayTracerBase{
 

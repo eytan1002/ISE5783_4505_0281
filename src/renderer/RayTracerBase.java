@@ -6,13 +6,14 @@ import scene.Scene;
 
 /**
  * RayTracerBase is an abstract class for all ray tracers
+ * It has a scene field
  *
+ * @ author - Eytan Kantman and Ori Perlmuter
  */
 public abstract class RayTracerBase {
     protected Scene scene;
 
     /**
-     *
      * @param scene - the scene to render
      */
     public RayTracerBase(Scene scene) {
@@ -20,7 +21,6 @@ public abstract class RayTracerBase {
     }
 
     /**
-     *
      * @param ray - the ray to trace
      * @return color
      */
