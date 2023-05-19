@@ -3,7 +3,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import renderer.*;
 import static java.awt.Color.YELLOW;
-import static renderer.Json.parseSceneFromJson;
 
 import com.google.gson.*;
 import geometries.*;
