@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import primitives.Point;
 import primitives.Vector;
 import primitives.Ray;
-import primitives.Vector;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class SphereTests {
     }
 
     /**
-     * Test method for {@link geometries.Sphere#findIntersections(Ray ray)}.
+     * Test method for {@link Intersectable#findIntersections(Ray)}.
      */
     @Test
     public void FindIntersectionsest() {

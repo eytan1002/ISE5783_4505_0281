@@ -13,7 +13,7 @@ import static primitives.Util.isZero;
  * The plane can also be defined by three non-collinear points in space.
  * @author Ori Perlmutter, Eitan Kaantman
  */
-public class Plane implements Geometry {
+public class Plane extends Geometry {
     Point q0;
     Vector normal;
 
@@ -60,7 +60,10 @@ public class Plane implements Geometry {
 
     @Override
     public List<Point> findIntersections(Ray ray) {
-
+        return null;
+    }
+        @Override
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         // if the ray and plane are parallel (i.e., dot product between their normal vectors is 0),
         // then there is no intersection between them
         double denominator = this.getNormal().dotProduct(ray.getDir());
@@ -73,7 +76,7 @@ public class Plane implements Geometry {
         // t represents the distance between the ray's starting point and the intersection point
         double t = (this.getNormal().dotProduct(q0.subtract(ray.getP0()))) / denominator;
         if (t > 0) {
-            return List.of(ray.findPoint(t));
+            return List.of(new GeoPoint(this, ray.findPoint(t)));
         }
         return null;
     }

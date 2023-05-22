@@ -43,8 +43,9 @@ public class Sphere extends RadialGeometry {
     }
 
 
+
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         // if the ray starts at the center of the sphere
         double tm = 0;
         double d = 0;
@@ -69,11 +70,11 @@ public class Sphere extends RadialGeometry {
         if (th == 0)
             return null;
         if (t1 <= 0){ // if the ray starts inside the sphere or the ray starts after the sphere
-            return List.of(ray.findPoint(t2));
+            return List.of(new GeoPoint(this,ray.findPoint(t2)));
         }
         if (t2 <= 0) { //if the ray starts after the sphere
-            return List.of(ray.findPoint(t1));
+            return List.of(new GeoPoint(this,ray.findPoint(t1)));
         }
-        return List.of(ray.findPoint(t1), ray.findPoint(t2)); // if the ray intersects the sphere twice
+        return List.of(new GeoPoint(this,ray.findPoint(t1)), new GeoPoint(this ,ray.findPoint(t2))); // if the ray intersects the sphere twice
     }
 }

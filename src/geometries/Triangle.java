@@ -27,8 +27,8 @@ public class Triangle extends Polygon {
 
     // using Polygon findIntersections
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        return super.findIntersections(ray);
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        return super.findGeoIntersectionsHelper(ray);
     }
 
 

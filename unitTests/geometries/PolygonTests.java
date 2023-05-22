@@ -6,7 +6,6 @@ import static primitives.Util.isZero;
 
 import org.junit.jupiter.api.Test;
 
-import geometries.Polygon;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
@@ -93,7 +92,7 @@ public class PolygonTests {
     }
 
     /**
-     * Test method for {@link geometries.Polygon#findIntersections(primitives.Ray)}.
+     * Test method for {@link Intersectable#findIntersections(Ray)}.
      */
     // decided to use the same test as in the triangle, since the polygon could be a triangle
     @Test

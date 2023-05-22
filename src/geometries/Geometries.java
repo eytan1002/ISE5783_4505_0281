@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * The class represents a collection of geometry shapes, and it implements the Intersectable interface.
  */
-public class Geometries implements Intersectable {
+public class Geometries extends Intersectable {
     List<Intersectable> geometries;
 
     /**
@@ -37,16 +37,18 @@ public class Geometries implements Intersectable {
         Collections.addAll(this.geometries, geometries);
     }
 
+
+
     /**
      * @param ray The ray that we want to find the intersections with the geometry shape
      * @return list of points where the ray intersect the geometry shape
      */
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         //if there are no intersections return null
-        List<Point> result = new LinkedList<>();
+        List<GeoPoint> result = new LinkedList<>();
         for (Intersectable geo : geometries) {
-            List<Point> temp = geo.findIntersections(ray);
+            List<GeoPoint> temp = geo.findGeoIntersectionsHelper(ray);
             if (temp != null) {
                 result.addAll(temp);
             }

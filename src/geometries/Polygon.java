@@ -16,7 +16,7 @@ import primitives.Vector;
  *
  * @author Dan
  */
-public class Polygon implements Geometry {
+public class Polygon extends Geometry {
    /**
     * List of polygon's vertices
     */
@@ -96,14 +96,14 @@ public class Polygon implements Geometry {
 
    // We used the barycentric coordinates method to check if a point is inside a polygon.
    @Override
-   public List<Point> findIntersections(Ray ray) {
+   public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
       // check if the ray intersects the plane of the polygon
       Plane plane = new Plane(vertices.get(0), vertices.get(1), vertices.get(2));
-      if (plane.findIntersections(ray) ==null) return null;
+      if (plane.findGeoIntersectionsHelper(ray) ==null) return null;
       // need to have list of intersections, as the barycentric coordinates method asks
-      List<Point> intersections = plane.findIntersections(ray);
+      List<GeoPoint> intersections = plane.findGeoIntersectionsHelper(ray);
               // there could be 1 intersection point with the plane, check if it is inside the polygon
-      Point point = intersections.get(0);
+      GeoPoint point = intersections.get(0);
       // Find the triangle in the polygon that contains the point
       for (int i = 0; i < size - 2; i++) {
          Point vertex1 = vertices.get(0);
@@ -129,7 +129,7 @@ public class Polygon implements Geometry {
 
          if (w1 > 0 && w2 > 0 && w3 > 0) {
             // The point is inside the triangle (and therefore inside the polygon)
-            return List.of(point);
+            return List.of(new GeoPoint(this,point.point));
          }
       }
       // The point is outside the polygon
