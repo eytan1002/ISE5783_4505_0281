@@ -25,7 +25,7 @@ public class Triangle extends Polygon {
         super(p1, p2, p3);
     }// using Sphere c'tor
 
-    // using Polygon findIntersections
+    // using Polygon findGeoIntersectionsHelper
     @Override
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         return super.findGeoIntersectionsHelper(ray);

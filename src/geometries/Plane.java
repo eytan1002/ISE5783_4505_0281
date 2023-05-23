@@ -11,6 +11,7 @@ import static primitives.Util.isZero;
 /**
  * The Plane class represents a plane in 3D space, defined by a point on the plane and a normal vector to the plane.
  * The plane can also be defined by three non-collinear points in space.
+ *
  * @author Ori Perlmutter, Eitan Kaantman
  */
 public class Plane extends Geometry {
@@ -58,11 +59,11 @@ public class Plane extends Geometry {
         return normal.normalize();
     }
 
+    /**
+     * @param ray intersecting the geometry shape
+     * @return list of intersection points
+     */
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        return null;
-    }
-        @Override
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         // if the ray and plane are parallel (i.e., dot product between their normal vectors is 0),
         // then there is no intersection between them

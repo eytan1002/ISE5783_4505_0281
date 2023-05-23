@@ -43,7 +43,11 @@ public class Sphere extends RadialGeometry {
     }
 
 
-
+    /**
+     *
+     * @param ray intersecting the geometry shape
+     * @return list of intersection points.
+     */
     @Override
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         // if the ray starts at the center of the sphere

@@ -1,6 +1,7 @@
 package primitives;
 
 import java.util.List;
+import geometries.Intersectable.GeoPoint;
 
 /**
  * The Ray class represents a ray in 3D space, composed of a starting point p0 and a direction vector dir.
@@ -64,21 +65,33 @@ public class Ray {
 
 
     /**
+     * for the moment, there are 2 similar funcs, one for GeoPoint and one for Point.
+     *
      * @param intersections, a list of intersections.
-     * @return the closest point to the ray's starting point, or null if the list is empty.
+     * @return the closest Geopoint to the ray's starting point, or null if the list is empty.
      */
-        public Point findClosestPoint(List<Point> intersections) {
+    public GeoPoint findClosestGeoPoint(List<GeoPoint> intersections) {
         if (intersections == null || intersections.isEmpty())
             return null;
         //compute the distance between the ray's starting point and the first point in the list
-        double minDistance = intersections.get(0).distance(p0);
-        Point minPoint = intersections.get(0);
-        for (Point p : intersections) {
-            if (p.distance(p0) < minDistance) {
-                minDistance = p.distance(p0);
+        double minDistance = intersections.get(0).point.distance(p0);
+        GeoPoint minPoint = intersections.get(0);
+        for (GeoPoint p : intersections) {
+            if (p.point.distance(p0) < minDistance) {
+                minDistance = p.point.distance(p0);
                 minPoint = p;
             }
         }
         return minPoint;
     }
+
+    /**
+     * @param points, a list of intersections.
+     * @return the closest point to the ray's starting point, or null if the list is empty.
+     */
+    public Point findClosestPoint(List<Point> points) {
+            return points == null || points.isEmpty() ? null
+                    : findClosestGeoPoint(points.stream().map(p -> new GeoPoint(null, p)).toList()).point;
+        }
+
 }

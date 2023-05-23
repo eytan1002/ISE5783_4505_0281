@@ -11,10 +11,7 @@ import java.util.Objects;
  * @author Ori Perlmutter, Eitan Kaantman
  */
 public abstract class Intersectable {
-    /**
-     * @param ray, the ray that we want to find the intersections with the geometry shape
-     * @return list of points where the ray intersect the geometry shape
-     */
+
     public  static class  GeoPoint {
         public Geometry geometry;
         public Point point;
@@ -60,7 +57,8 @@ public abstract class Intersectable {
         public double getZ() {return point.getZ();}
     }
         public final List<GeoPoint> findGeoIntersections(Ray ray) {
-            return findGeoIntersectionsHelper(ray);
+
+        return findGeoIntersectionsHelper(ray);
         }
 
     /**
@@ -70,7 +68,13 @@ public abstract class Intersectable {
      */
     protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
 
-        public List<Point> findIntersections(Ray ray) {
-        return null;
+    /**
+     * @param ray The ray that we want to find the intersections with the geometry shape
+     * @return list of points where the ray intersect the geometry shape, using the findGeoIntersections method
+     */
+    public List<Point> findIntersections(Ray ray) {
+        var geoList = findGeoIntersections(ray);
+        return geoList == null ? null : geoList.stream().map(gp -> gp.point).toList();
     }
+
 }

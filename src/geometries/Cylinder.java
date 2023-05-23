@@ -65,16 +65,15 @@ public class Cylinder extends Tube {
         return point.subtract(o).normalize();
     }
 
-    @Override
-    public List<Point> findIntersections(Ray ray) {
-        return null;
-    }
 
+    /**
+     * @param ray intersecting the geometry
+     * @return null at the moment
+     */
     @Override
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         return null;
     }
-
 
 
 }

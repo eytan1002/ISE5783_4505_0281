@@ -38,7 +38,6 @@ public class Geometries extends Intersectable {
     }
 
 
-
     /**
      * @param ray The ray that we want to find the intersections with the geometry shape
      * @return list of points where the ray intersect the geometry shape
