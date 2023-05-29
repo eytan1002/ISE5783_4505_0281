@@ -44,6 +44,16 @@ public class PointLight extends Light implements LightSource {
 
     }
 
+    /**
+     *
+     * @param point - origin of the light
+     * @return the distance between the light and the point
+     */
+    @Override
+    public double getDistance(Point point) {
+        return point.distance(this.position);
+    }
+
 
     public PointLight setKc(double kc) {
         this.Kc = kc;
