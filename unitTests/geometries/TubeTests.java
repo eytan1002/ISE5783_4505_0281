@@ -5,8 +5,7 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static primitives.Util.isZero;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TubeTests {
 

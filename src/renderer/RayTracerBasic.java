@@ -1,17 +1,11 @@
 package renderer;
 
-import geometries.Geometry;
-import geometries.Intersectable.*;
+import geometries.Intersectable.GeoPoint;
 import lighting.LightSource;
 import primitives.*;
 import scene.Scene;
 
-import java.util.List;
-
 import static primitives.Util.alignZero;
-import static primitives.Util.isZero;
-
-import java.util.List;
 
 /**
  * RayTracerBasic is a basic ray tracer, it extends RayTracerBase and implements the traceRay function
@@ -21,10 +15,11 @@ import java.util.List;
 
 public class RayTracerBasic extends RayTracerBase {
 
-    private static final double DELTA = 0.1;
+    private static final double DELTA = 0.1;//for shading, the delta for the ray
+
     public RayTracerBasic(Scene scene) {
         super(scene);
-    }
+    }//constructor, calls the super constructor
 
 
     /**
@@ -47,31 +42,31 @@ public class RayTracerBasic extends RayTracerBase {
     }
 
 
-
-
-
     /**
-     * @param gp          - the intersection point
-     * @param lightSource
-     * @param l           - the light vector
-     * @param n           - the normal vector
+     * @param gp           - the intersection point
+     * @param lightSource, the light source
+     * @param l            - the light vector
+     * @param n            - the normal vector
+     * @param nl           - the dot product of n and l, used in calcLocalEffects
      * @return - true if the point is unshaded, false otherwise
      */
-    private boolean unshaded(GeoPoint gp, LightSource lightSource, Vector l, Vector n, double nl){
+    private boolean unshaded(GeoPoint gp, LightSource lightSource, Vector l, Vector n, double nl) {
         Vector lightDirection = l.scale(-1); // from point to light source
-        Vector epsVector = n.scale(nl<0 ? DELTA : -DELTA); // move the point to the direction of the normal
+        Vector epsVector = n.scale(nl < 0 ? DELTA : -DELTA); // move the point to the direction of the normal
         Point point = gp.point.add(epsVector);
+
         Ray lightRay = new Ray(point, lightDirection); // ray to check shading
         var intersections = scene.getGeometries().findGeoIntersections(lightRay);
-        if (intersections == null) return true;
+        if (intersections == null)
+            return true;
         double lightDistance = lightSource.getDistance(gp.point);
-        for (GeoPoint geoPoint : intersections){ //if there are points in the intersections list that are closer to the point than lightDistance, the point is shaded
+        //if there are points in the intersections list that are closer to the point than lightDistance,
+        // the point is shaded
+        for (GeoPoint geoPoint : intersections) {
             if (alignZero(geoPoint.point.distance(gp.point) - lightDistance) <= 0) return false;
         }
         return true;
     }
-
-
 
 
     private Color calcLocalEffects(GeoPoint gp, Ray ray) {
@@ -85,11 +80,11 @@ public class RayTracerBasic extends RayTracerBase {
             Vector l = lightSource.getL(gp.point);
             double nl = alignZero(n.dotProduct(l));
             if (nl * nv > 0) { // sign(nl) == sing(nv)
-               if (unshaded(gp, lightSource, l, n,nl)) {
-                Color iL = lightSource.getIntensity(gp.point);
-                color = color.add(iL.scale(calcDiffusive(material, nl)),
-                        iL.scale(calcSpecular(material, n, l, nl, v)));
-               }
+                if (unshaded(gp, lightSource, l, n, nl)) {
+                    Color iL = lightSource.getIntensity(gp.point);
+                    color = color.add(iL.scale(calcDiffusive(material, nl)),
+                            iL.scale(calcSpecular(material, n, l, nl, v)));
+                }
             }
         }
         return color;

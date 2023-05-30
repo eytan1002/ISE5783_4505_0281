@@ -44,7 +44,6 @@ public class Sphere extends RadialGeometry {
 
 
     /**
-     *
      * @param ray intersecting the geometry shape
      * @return list of intersection points.
      */
@@ -53,10 +52,10 @@ public class Sphere extends RadialGeometry {
         // if the ray starts at the center of the sphere
         double tm = 0;
         double d = 0;
-        if (!center.equals(ray.getP0())){ // if the ray doesn't start at the center of the sphere
+        if (!center.equals(ray.getP0())) { // if the ray doesn't start at the center of the sphere
             Vector L = center.subtract(ray.getP0());
             tm = L.dotProduct(ray.getDir());
-            d =L.lengthSquared() - tm * tm; // d = (|L|^2 - tm^2)
+            d = L.lengthSquared() - tm * tm; // d = (|L|^2 - tm^2)
             if (d < 0)
                 d = -d;
             d = Math.sqrt(d);
@@ -73,12 +72,12 @@ public class Sphere extends RadialGeometry {
             return null;
         if (th == 0)
             return null;
-        if (t1 <= 0){ // if the ray starts inside the sphere or the ray starts after the sphere
-            return List.of(new GeoPoint(this,ray.findPoint(t2)));
+        if (t1 <= 0) { // if the ray starts inside the sphere or the ray starts after the sphere
+            return List.of(new GeoPoint(this, ray.findPoint(t2)));
         }
         if (t2 <= 0) { //if the ray starts after the sphere
-            return List.of(new GeoPoint(this,ray.findPoint(t1)));
+            return List.of(new GeoPoint(this, ray.findPoint(t1)));
         }
-        return List.of(new GeoPoint(this,ray.findPoint(t1)), new GeoPoint(this ,ray.findPoint(t2))); // if the ray intersects the sphere twice
+        return List.of(new GeoPoint(this, ray.findPoint(t1)), new GeoPoint(this, ray.findPoint(t2))); // if the ray intersects the sphere twice
     }
 }

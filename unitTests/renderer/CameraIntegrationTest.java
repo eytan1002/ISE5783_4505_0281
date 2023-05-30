@@ -1,9 +1,9 @@
 package renderer;
 
-import org.junit.jupiter.api.Test;
-
 import geometries.*;
-import primitives.*;
+import org.junit.jupiter.api.Test;
+import primitives.Point;
+import primitives.Vector;
 
 import java.util.LinkedList;
 import java.util.List;

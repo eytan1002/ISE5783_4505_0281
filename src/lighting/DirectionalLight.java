@@ -4,6 +4,12 @@ import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
 
+/**
+ * This class represents the directional light in the scene.
+ * It is a constant light that is not affected by the distance from the light source.
+ *
+ * @ author - Eytan Kantman and Ori Perlmuter
+ */
 public class DirectionalLight extends Light implements LightSource {
 
     private Vector direction;

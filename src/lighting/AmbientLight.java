@@ -10,31 +10,26 @@ import primitives.Double3;
  * @ author - Eytan Kantman and Ori Perlmuter
  */
 public class AmbientLight extends Light {
-    private Color IA;
-    private Double3 KA;
     public static AmbientLight NONE = new AmbientLight(Color.BLACK, Double3.ZERO);
 
     /**
      * Constructor for AmbientLight
+     *
      * @param ia - the color of the ambient light
      * @param ka - the coefficient of the ambient light
      *           calls super constructor for light intensity
      */
     public AmbientLight(Color ia, Double3 ka) {
         super(ia.scale(ka));
-        this.IA = ia;
-        this.KA = ka;
     }
 
     /**
-     *  Constructor for AmbientLight, for the case that ka is a scalar
+     * Constructor for AmbientLight, for the case that ka is a scalar
+     *
      * @param ia - the color of the ambient light
      * @param ka - the coefficient of the ambient light
      */
     public AmbientLight(Color ia, double ka) {//for the case that ka is a scalar
         super(ia.scale(ka));
-        this.IA = ia;
-        this.KA = new Double3(ka, ka, ka);
     }
-
 }

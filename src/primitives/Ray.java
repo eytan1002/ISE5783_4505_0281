@@ -1,7 +1,8 @@
 package primitives;
 
-import java.util.List;
 import geometries.Intersectable.GeoPoint;
+
+import java.util.List;
 
 /**
  * The Ray class represents a ray in 3D space, composed of a starting point p0 and a direction vector dir.
@@ -15,11 +16,11 @@ public class Ray {
     /**
      * Constructs a new Ray object with a given direction vector and starting point.
      *
-     * @param v the direction vector of the ray, which gets normalized
-     * @param p the starting point of the ray
+     * @param direction vector of the ray, which gets normalized
+     * @param p         the starting point of the ray
      */
-    public Ray(Point p, Vector v) {
-        dir = v.normalize();
+    public Ray(Point p, Vector direction) {
+        dir = direction.normalize();
         p0 = p;
     }
 
@@ -74,12 +75,13 @@ public class Ray {
         if (intersections == null || intersections.isEmpty())
             return null;
         //compute the distance between the ray's starting point and the first point in the list
-        double minDistance = intersections.get(0).point.distance(p0);
+        double minDistance = Double.MAX_VALUE;
         GeoPoint minPoint = intersections.get(0);
-        for (GeoPoint p : intersections) {
-            if (p.point.distance(p0) < minDistance) {
-                minDistance = p.point.distance(p0);
-                minPoint = p;
+        for (GeoPoint gp : intersections) {
+            double dist = gp.point.distanceSquared(p0);
+            if (dist < minDistance) {
+                minDistance = dist;
+                minPoint = gp;
             }
         }
         return minPoint;
@@ -90,8 +92,10 @@ public class Ray {
      * @return the closest point to the ray's starting point, or null if the list is empty.
      */
     public Point findClosestPoint(List<Point> points) {
-            return points == null || points.isEmpty() ? null
-                    : findClosestGeoPoint(points.stream().map(p -> new GeoPoint(null, p)).toList()).point;
-        }
+        return points == null || points.isEmpty() ? null
+                : findClosestGeoPoint(points.stream()
+                .map(p -> new GeoPoint(null, p))
+                .toList()).point;
+    }
 
 }

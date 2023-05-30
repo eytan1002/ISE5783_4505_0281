@@ -4,10 +4,10 @@ import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
 
-import static primitives.Util.isZero;
-
 /**
  * This class represents a point light in the scene.
+ *
+ * @ author - Eytan Kantman and Ori Perlmuter
  */
 public class SpotLight extends PointLight {
     protected double narrowBeam = 1;//default value, so this will not affect the result

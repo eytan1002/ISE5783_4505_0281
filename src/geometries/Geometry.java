@@ -31,6 +31,15 @@ public abstract class Geometry extends Intersectable {
     }
 
     /**
+     * @param emission The emission color of the geometry
+     * @return The geometry itself
+     */
+    public Geometry setEmission(Color emission) {
+        this.emission = emission;
+        return this;
+    }
+
+    /**
      * @return The material of the geometry
      */
     public Material getMaterial() {
@@ -45,15 +54,6 @@ public abstract class Geometry extends Intersectable {
      */
     public Geometry setMaterial(Material material) {
         this.material = material;
-        return this;
-    }
-
-    /**
-     * @param emission The emission color of the geometry
-     * @return The geometry itself
-     */
-    public Geometry setEmission(Color emission) {
-        this.emission = emission;
         return this;
     }
 

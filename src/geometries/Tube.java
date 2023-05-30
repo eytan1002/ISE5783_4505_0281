@@ -54,15 +54,14 @@ public class Tube extends RadialGeometry {
     }
 
     /**
-     *
      * @param ray intersecting the geometry
      * @return null at the moment.
      */
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray){
-            return null;
-        }
-
-
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        return null;
     }
+
+
+}
 

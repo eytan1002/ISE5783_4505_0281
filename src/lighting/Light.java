@@ -4,9 +4,11 @@ import primitives.Color;
 
 /**
  * abstract class for all lights
+ *
+ * @ author - Eytan Kantman and Ori Perlmuter
  */
 public abstract class Light {
-    private Color intensity;
+    private final Color intensity;
 
     /**
      * constructor for light

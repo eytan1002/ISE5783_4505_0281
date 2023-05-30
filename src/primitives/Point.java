@@ -4,15 +4,16 @@ import java.util.Objects;
 
 /**
  * This class represent a point object.
- * @autor Ori perlmutter, Eytan Kantman
  *
+ * @autor Ori perlmutter, Eytan Kantman
  */
 public class Point {
-    public static final Point ZERO = new Point(0, 0, 0) ;
+    public static final Point ZERO = new Point(0, 0, 0);
     final Double3 xyz;
 
     /**
      * Constructs a new Point object with the given coordinates.
+     *
      * @param x The x-coordinate of the point.
      * @param y The y-coordinate of the point.
      * @param z The z-coordinate of the point.
@@ -23,6 +24,7 @@ public class Point {
 
     /**
      * Constructs a new Point object with the given Double3 object.
+     *
      * @param double3 The Double3 object containing the coordinates of the point.
      */
     Point(Double3 double3) {
@@ -31,6 +33,7 @@ public class Point {
 
     /**
      * Checks whether this Point object is equal to another object.
+     *
      * @param o The object to compare with this Point object.
      * @return true if the objects are equal, false otherwise.
      */
@@ -61,7 +64,7 @@ public class Point {
      * @param other The other Point object.
      * @return The distance between this Point object and the other Point object.
      */
-    public double distance(Point other){
+    public double distance(Point other) {
         return Math.sqrt(distanceSquared(other));
     }
 
@@ -69,29 +72,31 @@ public class Point {
      * @param other The other Point object.
      * @return The squared distance between this Point object and the other Point object.
      */
-    public double distanceSquared(Point other){
+    public double distanceSquared(Point other) {
         Double dx = other.xyz.d1 - xyz.d1;
         Double dy = other.xyz.d2 - xyz.d2;
         Double dz = other.xyz.d3 - xyz.d3;
 
-        return dx*dx + dy*dy + dz*dz;
+        return dx * dx + dy * dy + dz * dz;
     }
 
     /**
      * Adds a vector to this Point object.
+     *
      * @param vector The vector to add.
      * @return A new Point object representing the result of the addition.
      */
-    public Point add(Vector vector){
+    public Point add(Vector vector) {
         return new Point(xyz.add(vector.xyz));
     }
 
     /**
      * Subtracts another Point object from this Point object.
+     *
      * @param point The Point object to subtract.
      * @return A new Vector object representing the result of the subtraction.
      */
-    public Vector subtract(Point point){
+    public Vector subtract(Point point) {
         return new Vector(xyz.subtract(point.xyz));
     }
 
@@ -103,6 +108,7 @@ public class Point {
         return xyz.d2;
     }
 
-    public double getZ() {return xyz.d3;
+    public double getZ() {
+        return xyz.d3;
     }
 }

@@ -6,6 +6,8 @@ import primitives.Vector;
 
 /**
  * interface for all lights
+ *
+ * @ author - Eytan Kantman and Ori Perlmuter
  */
 public interface LightSource {
     /**

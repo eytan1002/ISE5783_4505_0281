@@ -1,9 +1,10 @@
 package geometries;
 
-import primitives.Point;
 import primitives.Ray;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * The class represents a collection of geometry shapes, and it implements the Intersectable interface.

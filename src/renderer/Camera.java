@@ -5,10 +5,7 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.MissingResourceException;
-import java.util.Random;
 
 import static primitives.Util.isZero;
 
@@ -149,7 +146,7 @@ public class Camera {
     /**
      * checks if imageWriter and tracer are initialized
      */
-    public void renderImage() {
+    public Camera renderImage() {
         //check all the parameters are initialized
         if (imageWriter == null) {
             throw new MissingResourceException("Missing resource", ImageWriter.class.getName(), "");
@@ -157,15 +154,18 @@ public class Camera {
         if (tracer == null) {
             throw new MissingResourceException("Missing resource", RayTracerBase.class.getName(), "");
         }
+        int nX = imageWriter.getNx();
+        int nY = imageWriter.getNy();
         // iterate over all the pixels in the view plane
-        for (int i = 0; i < imageWriter.getNx(); i++) {
-            for (int j = 0; j < imageWriter.getNy(); j++) {
+        for (int i = 0; i < nX; i++) {
+            for (int j = 0; j < nY; j++) {
                 // construct a ray from the camera to the middle of the pixel
-                Color pixelColor = castRay(imageWriter.getNx(), imageWriter.getNy(), i, j);
+                Color pixelColor = castRay(nX, nY, i, j);
                 // color the pixel with the color of the closest intersection point
                 imageWriter.writePixel(i, j, pixelColor);
             }
         }
+        return this;
     }
 
     /**

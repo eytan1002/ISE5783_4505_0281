@@ -1,14 +1,11 @@
 package primitives;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-import primitives.Ray;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Testing Ray Class

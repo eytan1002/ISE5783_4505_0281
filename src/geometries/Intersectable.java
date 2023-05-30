@@ -4,15 +4,35 @@ import primitives.Point;
 import primitives.Ray;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * The class uses as an interface, we chose to make it abstract class, and it cant extend an interface
+ *
  * @author Ori Perlmutter, Eitan Kaantman
  */
 public abstract class Intersectable {
 
-    public  static class  GeoPoint {
+    public final List<GeoPoint> findGeoIntersections(Ray ray) {
+
+        return findGeoIntersectionsHelper(ray);
+    }
+
+    /**
+     * @param ray intersecting the geometry
+     * @return list of intersection points
+     */
+    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
+
+    /**
+     * @param ray The ray that we want to find the intersections with the geometry shape
+     * @return list of points where the ray intersect the geometry shape, using the findGeoIntersections method
+     */
+    public List<Point> findIntersections(Ray ray) {
+        var geoList = findGeoIntersections(ray);
+        return geoList == null ? null : geoList.stream().map(gp -> gp.point).toList();
+    }
+
+    public static class GeoPoint {
         public Geometry geometry;
         public Point point;
 
@@ -54,27 +74,9 @@ public abstract class Intersectable {
             return point.getY();
         }
 
-        public double getZ() {return point.getZ();}
-    }
-        public final List<GeoPoint> findGeoIntersections(Ray ray) {
-
-        return findGeoIntersectionsHelper(ray);
+        public double getZ() {
+            return point.getZ();
         }
-
-    /**
-     *
-     * @param  ray intersecting the geometry
-     * @return list of intersection points
-     */
-    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
-
-    /**
-     * @param ray The ray that we want to find the intersections with the geometry shape
-     * @return list of points where the ray intersect the geometry shape, using the findGeoIntersections method
-     */
-    public List<Point> findIntersections(Ray ray) {
-        var geoList = findGeoIntersections(ray);
-        return geoList == null ? null : geoList.stream().map(gp -> gp.point).toList();
     }
 
 }

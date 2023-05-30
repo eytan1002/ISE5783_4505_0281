@@ -7,6 +7,8 @@ import primitives.Vector;
 /**
  * This class represents a point light in the scene.
  * It is a constant light that is not affected by the distance from the light source.
+ *
+ * @ author - Eytan Kantman and Ori Perlmutter
  */
 public class PointLight extends Light implements LightSource {
     private Point position;
@@ -16,8 +18,9 @@ public class PointLight extends Light implements LightSource {
 
     /**
      * constructor for point light
+     *
      * @param intensity - light intensity
-     * @param position - light position
+     * @param position  - light position
      */
     public PointLight(Color intensity, Point position) {
         super(intensity);
@@ -45,7 +48,6 @@ public class PointLight extends Light implements LightSource {
     }
 
     /**
-     *
      * @param point - origin of the light
      * @return the distance between the light and the point
      */
