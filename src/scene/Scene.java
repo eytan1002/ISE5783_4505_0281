@@ -51,7 +51,8 @@ public class Scene {
     }
 
     /**
-     * class SceneBuilder is the builder for the scene, it has setters for each of the fields, returning the object itself.
+     * class SceneBuilder is the builder for the scene, it has setters for each of the fields,
+     * returning the object itself.
      */
     public static class SceneBuilder {
         private final String name;
@@ -64,6 +65,8 @@ public class Scene {
             this.name = name;
         }
 
+        /// setters
+        /// chaining methods to set all the fields
         public SceneBuilder setLights(List<LightSource> lights) {
             this.lights = lights;
             return this;

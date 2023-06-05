@@ -70,7 +70,9 @@ public class Camera {
         this.p0 = p0;
         this.vTo = vTo.normalize();
         this.vUp = vUp.normalize();
-        this.vRight = this.vTo.crossProduct(this.vUp);// vRight is orthogonal to vTo and vUp. and points to the right side of the camera
+        // vRight is orthogonal to vTo and vUp.
+        // and points to the right side of the camera
+        this.vRight = this.vTo.crossProduct(this.vUp);
     }
 
 
@@ -88,6 +90,7 @@ public class Camera {
         this.tracer = tracer;
         return this;
     }
+
 
     /**
      * setter for imageWriter

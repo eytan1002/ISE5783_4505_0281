@@ -78,6 +78,7 @@ public class Sphere extends RadialGeometry {
         if (t2 <= 0) { //if the ray starts after the sphere
             return List.of(new GeoPoint(this, ray.findPoint(t1)));
         }
-        return List.of(new GeoPoint(this, ray.findPoint(t1)), new GeoPoint(this, ray.findPoint(t2))); // if the ray intersects the sphere twice
+        // if the ray intersects the sphere twice
+        return List.of(new GeoPoint(this, ray.findPoint(t1)), new GeoPoint(this, ray.findPoint(t2)));
     }
 }

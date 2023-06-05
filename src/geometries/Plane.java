@@ -30,7 +30,8 @@ public class Plane extends Geometry {
     }
 
     /**
-     * Constructs a plane by three non-collinear points in space By creating 2 vectors on it and calc their cross product vector
+     * Constructs a plane by three non-collinear points in space By creating 2
+     * vectors on it and calc their cross product vector
      *
      * @param p1 A point on the plane.
      * @param p2 A second point on the plane.

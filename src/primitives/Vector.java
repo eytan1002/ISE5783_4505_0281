@@ -117,7 +117,9 @@ public class Vector extends Point {
 
     @Override
     /**
-     * Compares this vector to the specified object. The result is true if and only if the argument is not null and is a Vector object that represents the same sequence of coordinates as this object
+     * Compares this vector to the specified object. The result is true if
+     * and only if the argument is not null and is a Vector object that represents the same sequence
+     * of coordinates as this object
      * @param o the object to compare this vector against
      * @return true if the given object represents a Vector equivalent to this vector, false otherwise
      */

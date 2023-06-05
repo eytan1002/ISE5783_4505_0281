@@ -109,7 +109,7 @@ public class Polygon extends Geometry {
             Point vertex3 = vertices.get(i + 2);
       /*
       Explaination of the barycentric coordinates method:
-        https://en.wikipedia.org/wiki/Barycentric_coordinate_system#Conversion_between_barycentric_and_Cartesian_coordinates
+  https://en.wikipedia.org/wiki/Barycentric_coordinate_system#Conversion_between_barycentric_and_Cartesian_coordinates
        */
             // Calculate the barycentric coordinates of the point with respect to the triangle
             //w1 = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))

@@ -77,7 +77,7 @@ public class Material {
     }
 
     public Material setKt(double kt) {
-        this.Kt = new Double3(kt);
+        this.Kt = new Double3(kt, kt, kt);
         return this;
     }
 
