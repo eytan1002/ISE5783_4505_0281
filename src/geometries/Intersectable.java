@@ -14,14 +14,18 @@ public abstract class Intersectable {
 
     public final List<GeoPoint> findGeoIntersections(Ray ray) {
 
-        return findGeoIntersectionsHelper(ray);
+        return findGeoIntersectionsHelper(ray, Double.POSITIVE_INFINITY);
+    }
+
+    public final List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+        return findGeoIntersectionsHelper(ray, maxDistance);
     }
 
     /**
      * @param ray intersecting the geometry
      * @return list of intersection points
      */
-    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
+    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
 
     /**
      * @param ray The ray that we want to find the intersections with the geometry shape

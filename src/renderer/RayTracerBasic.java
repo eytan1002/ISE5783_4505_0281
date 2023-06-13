@@ -20,6 +20,19 @@ public class RayTracerBasic extends RayTracerBase {
     private static final int MAX_CALC_COLOR_LEVEL = 10;//the max level of recursion
     private static final double MIN_CALC_COLOR_K = 0.001;//the minimum k for the recursion
 
+    private boolean softShadow = false; // Determines if soft shadow functionality should be used
+
+    /**
+     * Setter for the softShadow field.
+     *
+     * @param softShadow Boolean value to determine if soft shadow functionality should be used.
+     * @return This instance of the ray tracer.
+     */
+    public RayTracerBasic setSoftShadow(boolean softShadow) {
+        this.softShadow = softShadow;
+        return this;
+    }
+
     public RayTracerBasic(Scene scene) {
         super(scene);
     }//constructor, calls the super constructor
@@ -156,15 +169,42 @@ public class RayTracerBasic extends RayTracerBase {
         if (nv == 0)
             return color;
         Material material = gp.geometry.getMaterial();
-        for (LightSource lightSource : scene.getLights()) {
-            Vector l = lightSource.getL(point);
-            double nl = alignZero(n.dotProduct(l));
-            if (nl * nv > 0) { // sign(nl) == sign(nv)
-                Double3 ktr = transparency(gp, lightSource, l, n, nl);
-                if (ktr.product(k).greaterThan(MIN_CALC_COLOR_K)) {
-                    Color iL = lightSource.getIntensity(point).scale(ktr);
-                    color = color.add(iL.scale(calcDiffusive(material, nl)),
-                            iL.scale(calcSpecular(material, n, l, nl, v)));
+        //option for soft shadows:
+        if (softShadow) {
+
+            for (LightSource lightSource : scene.getLights()) {
+                Color colorBeam = Color.BLACK;//starting color for shade
+                var vectors = lightSource.getListL(point);
+                for (var l : vectors) {
+                    double nl = alignZero(n.dotProduct(l));
+                    // check that light direction is towards shape and not behind
+                    if (nl * nv > 0) { // sign(nl) == sing(nv)
+
+                        Double3 ktr = transparency(gp, lightSource, l, n, nl);
+                        if (ktr.scale(k).greaterThan(MIN_CALC_COLOR_K)) {
+                            Color iL = lightSource.getIntensity(gp.point).scale(ktr);
+                            //    color = color.add(iL.scale(calcDiffusive(material, nl)),
+                            colorBeam = colorBeam.add(iL.scale(calcDiffusive(material, nl)),
+                                    // (Ks * max(0 ,(-v).dotProduct(r)) ** nShinines ) * Il
+                                    iL.scale(calcSpecular(material, n, l, nl, v)));
+                        }
+                    }
+                }
+                color = color.add(colorBeam.reduce(vectors.size()));
+
+            }
+        } else {
+
+            for (LightSource lightSource : scene.getLights()) {
+                Vector l = lightSource.getL(point);
+                double nl = alignZero(n.dotProduct(l));
+                if (nl * nv > 0) { // sign(nl) == sign(nv)
+                    Double3 ktr = transparency(gp, lightSource, l, n, nl);
+                    if (ktr.product(k).greaterThan(MIN_CALC_COLOR_K)) {
+                        Color iL = lightSource.getIntensity(point).scale(ktr);
+                        color = color.add(iL.scale(calcDiffusive(material, nl)),
+                                iL.scale(calcSpecular(material, n, l, nl, v)));
+                    }
                 }
             }
         }

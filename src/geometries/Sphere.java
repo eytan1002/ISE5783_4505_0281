@@ -2,10 +2,11 @@ package geometries;
 
 import primitives.Point;
 import primitives.Ray;
-import primitives.Util;
 import primitives.Vector;
 
 import java.util.List;
+
+import static primitives.Util.alignZero;
 
 /**
  * Represents a sphere in 3D space using its radius and center point
@@ -48,37 +49,54 @@ public class Sphere extends RadialGeometry {
      * @return list of intersection points.
      */
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        // if the ray starts at the center of the sphere
-        double tm = 0;
-        double d = 0;
-        if (!center.equals(ray.getP0())) { // if the ray doesn't start at the center of the sphere
-            Vector L = center.subtract(ray.getP0());
-            tm = L.dotProduct(ray.getDir());
-            d = L.lengthSquared() - tm * tm; // d = (|L|^2 - tm^2)
-            if (d < 0)
-                d = -d;
-            d = Math.sqrt(d);
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        Point P0 = ray.getP0();
+        Vector v = ray.getDir();
+
+        if (P0.equals(center)) {
+            if (alignZero(radius - maxDistance) > 0) {
+                return null;
+            }
+            return List.of(new GeoPoint(this, center.add(v.scale(radius))));
         }
-        if (d > getRadius()) // if the ray doesn't intersect the sphere
+
+        Vector U = center.subtract(P0);
+
+        double tm = alignZero(v.dotProduct(U));
+        double d = alignZero(Math.sqrt(U.lengthSquared() - tm * tm));
+
+        // no intersections : the ray direction is above the sphere
+        if (d >= radius) {
             return null;
-        // computing the distance from the ray's start point to the intersection points
-        double th = Math.sqrt(getRadius() * getRadius() - d * d);
-        double t1 = tm - th;
-        double t2 = tm + th;
-        if (t1 <= 0 && t2 <= 0)
-            return null;
-        if (Util.alignZero(t2) == 0) // if the ray is tangent to the sphere
-            return null;
-        if (th == 0)
-            return null;
-        if (t1 <= 0) { // if the ray starts inside the sphere or the ray starts after the sphere
-            return List.of(new GeoPoint(this, ray.findPoint(t2)));
         }
-        if (t2 <= 0) { //if the ray starts after the sphere
-            return List.of(new GeoPoint(this, ray.findPoint(t1)));
+
+        double th = alignZero(Math.sqrt(radius * radius - d * d));
+
+        double t1 = alignZero(tm - th);
+        double t2 = alignZero(tm + th);
+
+        if (t1 <= 0 && t2 <= 0) {
+            return null;
         }
-        // if the ray intersects the sphere twice
-        return List.of(new GeoPoint(this, ray.findPoint(t1)), new GeoPoint(this, ray.findPoint(t2)));
+
+        if (t1 > 0 && t2 > 0 && alignZero(t1 - maxDistance) <= 0 && alignZero(t2 - maxDistance) <= 0) {
+//            Point P1 = P0.add(v.scale(t1));
+//            Point P2 = P0.add(v.scale(t2));
+            Point P1 = ray.getPoint(t1);
+            Point P2 = ray.getPoint(t2);
+            return List.of(new GeoPoint(this, P1), new GeoPoint(this, P2));
+        }
+        if (t1 > 0 && alignZero(t1 - maxDistance) <= 0) {
+//            Point P1 = P0.add(v.scale(t1));
+            Point P1 = ray.getPoint(t1);
+            return List.of(new GeoPoint(this, P1));
+        }
+        if (t2 > 0 && alignZero(t2 - maxDistance) <= 0) {
+//            Point P2 = P0.add(v.scale(t2));
+            Point P2 = ray.getPoint(t2);
+            return List.of(new GeoPoint(this, P2));
+        }
+        return null;
     }
+
 }

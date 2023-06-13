@@ -104,6 +104,18 @@ public class Camera {
     }
 
     /**
+     * this functions moves the camera place:
+     */
+    public Camera moveCameraPlace(Vector v) {
+        this.p0 = this.p0.add(v);
+        return this;
+    }
+    /** this functions rotates the camera on the Vto axis:
+     *
+     */
+
+
+    /**
      * @param width, height: size of VP
      * @return the camera object after setting VP's size
      */
@@ -213,6 +225,63 @@ public class Camera {
         }
         imageWriter.writeToImage();//delegate to image writer
     }
+
+
+    //region move and rotate camera
+
+    /**
+     * move a camera to a different position point (angel of camera does not change)
+     *
+     * @param to    number coordinates to move on Z axis
+     * @param up    number coordinates to move on Y axis
+     * @param right number coordinates to move on X axis
+     */
+    public void moveCamera(double to, double up, double right) {
+        // all values == 0 , do not move camera
+        if (to == 0 && up == 0 && right == 0)
+            return;
+        // scale  and set camera's position point with values sent as parameters to move to new point
+        if (to != 0)
+            p0 = p0.add(vTo.scale(to));
+        if (up != 0)
+            p0 = p0.add(vUp.scale(up));
+        if (right != 0)
+            p0 = p0.add(vRight.scale(right));
+
+    }
+
+    public Camera cameraPosition(Point newPosition, Point target, double angle) {
+        p0 = newPosition;
+        vTo = target.subtract(newPosition).normalize();
+        try {
+            vUp = vTo.crossProduct(vRight).normalize();
+            vRight = vTo.crossProduct(Vector.Y_AXIS).normalize();
+
+        } catch (IllegalArgumentException e) {
+            vUp = Vector.Z_AXIS;
+            vRight = Vector.X_AXIS;
+        }
+        rotateCamera(angle);
+        return this;
+    }
+
+
+    /**
+     * This function set new camera position with rotation
+     *
+     * @param angle - the angle of rotation (degree)
+     * @return the camera after set the new position
+     * @author Dan Zilbershtein
+     */
+
+    public Camera rotateCamera(double angle) {
+        if (angle == 0)
+            return this;
+        vUp = vUp.vectorRotate(vTo, angle);
+        vRight = vTo.crossProduct(vUp).normalize();
+        return this;
+    }
+
 
     public int getcDistance() {
         return cDistance;

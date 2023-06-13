@@ -4,6 +4,8 @@ import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
 
+import java.util.List;
+
 /**
  * This class represents the directional light in the scene.
  * It is a constant light that is not affected by the distance from the light source.
@@ -40,6 +42,15 @@ public class DirectionalLight extends Light implements LightSource {
     @Override
     public Vector getL(Point point) {
         return direction.normalize(); //that is the direction of the light, the vector from the point to the light
+    }
+
+    /*
+    returns a list of vectors from the point to the light
+     */
+    @Override
+    public List<Vector> getListL(Point p) {
+        return List.of(getL(p));
+
     }
 
     @Override

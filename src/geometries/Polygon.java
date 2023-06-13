@@ -6,6 +6,7 @@ import primitives.Vector;
 
 import java.util.List;
 
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 /**
@@ -94,43 +95,59 @@ public class Polygon extends Geometry {
 
     // We used the barycentric coordinates method to check if a point is inside a polygon.
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        // check if the ray intersects the plane of the polygon
-        Plane plane = new Plane(vertices.get(0), vertices.get(1), vertices.get(2));
-        if (plane.findGeoIntersectionsHelper(ray) == null) return null;
-        // need to have list of intersections, as the barycentric coordinates method asks
-        List<GeoPoint> intersections = plane.findGeoIntersectionsHelper(ray);
-        // there could be 1 intersection point with the plane, check if it is inside the polygon
-        GeoPoint point = intersections.get(0);
-        // Find the triangle in the polygon that contains the point
-        for (int i = 0; i < size - 2; i++) {
-            Point vertex1 = vertices.get(0);
-            Point vertex2 = vertices.get(i + 1);
-            Point vertex3 = vertices.get(i + 2);
-      /*
-      Explaination of the barycentric coordinates method:
-  https://en.wikipedia.org/wiki/Barycentric_coordinate_system#Conversion_between_barycentric_and_Cartesian_coordinates
-       */
-            // Calculate the barycentric coordinates of the point with respect to the triangle
-            //w1 = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
-            double w1 = ((vertex2.getY() - vertex3.getY()) * (point.getX() - vertex3.getX()) +
-                    (vertex3.getX() - vertex2.getX()) * (point.getY() - vertex3.getY())) /
-                    ((vertex2.getY() - vertex3.getY()) * (vertex1.getX() - vertex3.getX()) +
-                            (vertex3.getX() - vertex2.getX()) * (vertex1.getY() - vertex3.getY()));
-            //w2 = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
-            double w2 = ((vertex3.getY() - vertex1.getY()) * (point.getX() - vertex3.getX()) +
-                    (vertex1.getX() - vertex3.getX()) * (point.getY() - vertex3.getY())) /
-                    ((vertex2.getY() - vertex3.getY()) * (vertex1.getX() - vertex3.getX()) +
-                            (vertex3.getX() - vertex2.getX()) * (vertex1.getY() - vertex3.getY()));
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        // find intersection between ray and plane containing the polygon
+        List<GeoPoint> points = plane.findGeoIntersections(ray, maxDistance);
+        // no intersections with plane , ray does not intersect polygon
+        if (points == null)
+            return null;
 
-            double w3 = 1 - w1 - w2;
+        //check that intersection point is closer to ray origin than
+        // max distance parameter
+        double distance = points.get(0).point.distance(ray.getP0());
+        if (alignZero(distance - maxDistance) > 0)
+            return null;
 
-            if (w1 > 0 && w2 > 0 && w3 > 0) {
-                // The point is inside the triangle (and therefore inside the polygon)
-                return List.of(new GeoPoint(this, point.point));
-            }
+        // check that intersection point is within polygon boundary
+        // by  creating vectors from ray origin to each pair of adjacent vertices in polygon
+        // if the sign of the dot product of the vertices for all pairs is matching. ray intersects polygon
+        Point p0 = ray.getP0();
+        Vector direction = ray.getDir();
+
+        // get vector from ray origin to first vertices of polygon
+        Vector v1 = vertices.get(0).subtract(p0);
+
+        // get vector from ray origin to adjacent vertices of previous vertices
+        Vector v2 = vertices.get(1).subtract(p0);
+
+        // get sign of dot product of the vectors
+        double sign = direction.dotProduct(v2.crossProduct(v1));
+
+        // if dot product == 0 ray does not intersect polygon
+        if (isZero(sign))
+            return null;
+
+        // flag setting the sign of the dot product of the first pair of vertices
+        boolean checkSign = sign > 0;
+
+        // loop over all adjacent vertices in polygon and check sign of dot-product for constructed
+        // vectors
+        for (int i = vertices.size() - 1; i > 0; --i) {
+            v2 = v1;
+            v1 = vertices.get(i).subtract(p0);
+            sign = alignZero(direction.dotProduct(v2.crossProduct(v1)));
+
+            // vectors constructed are orthogonal , ray does not intersect polygon
+            if (isZero(sign))
+                return null;
+
+            //  sign is not matching
+            if (checkSign != (sign > 0))
+                return null;
         }
-        // The point is outside the polygon
-        return null;
+
+        // all signs were matching return the intersection point
+        return List.of(new GeoPoint(this, points.get(0).point));
     }
+
 }

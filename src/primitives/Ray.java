@@ -4,6 +4,8 @@ import geometries.Intersectable.GeoPoint;
 
 import java.util.List;
 
+import static primitives.Util.isZero;
+
 /**
  * The Ray class represents a ray in 3D space, composed of a starting point p0 and a direction vector dir.
  *
@@ -40,6 +42,16 @@ public class Ray {
      */
     public Vector getDir() {
         return dir;
+    }
+
+
+    /**
+     * creating a Point at a specific distance in the ray's direction
+     */
+    public Point getPoint(double t) {
+        if (isZero(t))
+            return p0;
+        return p0.add(dir.scale(t));
     }
 
 

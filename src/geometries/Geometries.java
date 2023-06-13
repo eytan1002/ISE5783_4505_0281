@@ -44,19 +44,26 @@ public class Geometries extends Intersectable {
      * @return list of points where the ray intersect the geometry shape
      */
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        //if there are no intersections return null
-        List<GeoPoint> result = new LinkedList<>();
-        for (Intersectable geo : geometries) {
-            List<GeoPoint> temp = geo.findGeoIntersectionsHelper(ray);
-            if (temp != null) {
-                result.addAll(temp);
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        List<GeoPoint> result = null;   // intersection points
+
+        //for each geometry in intersect-able collection check intersection points
+        for (var item : geometries) {
+
+            // get intersection point for each specific item, (item can be either geometry/nested composite of geometries)
+            List<GeoPoint> itemList = item.findGeoIntersections(ray, maxDistance);
+
+            // points were found , add to composite's total intersection points list
+            if (itemList != null) {
+                if (result == null) {
+                    result = new LinkedList<>();
+                }
+                result.addAll(itemList);
             }
         }
-        if (result.isEmpty()) {
-            return null;
-        }
+        // return list of points - null if no intersection points were found
         return result;
+
     }
 
 

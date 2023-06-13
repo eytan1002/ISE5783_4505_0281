@@ -128,4 +128,46 @@ public class Vector extends Point {
         if (!(o instanceof Vector vector)) return false;
         return xyz.equals(vector.xyz);
     }
+
+    /**
+     * X Axis
+     */
+    public static final Vector X_AXIS = new Vector(1, 0, 0);
+    /**
+     * Y Axis
+     */
+    public static final Vector Y_AXIS = new Vector(0, 1, 0);
+    /**
+     * Z Axis
+     */
+    public static final Vector Z_AXIS = new Vector(0, 0, 1);
+
+
+    public Vector vectorRotate(Vector axis, double theta) {
+        double x = this.getX();
+        double y = this.getY();
+        double z = this.getZ();
+
+        double u = axis.getX();
+        double v = axis.getY();
+        double w = axis.getZ();
+
+        double v1 = u * x + v * y + w * z;
+
+        double thetaRad = Math.toRadians(theta);
+        double xPrime = u * v1 * (1d - Math.cos(thetaRad))
+                + x * Math.cos(thetaRad)
+                + (-w * y + v * z) * Math.sin(thetaRad);
+
+        double yPrime = v * v1 * (1d - Math.cos(thetaRad))
+                + y * Math.cos(thetaRad)
+                + (w * x - u * z) * Math.sin(thetaRad);
+
+        double zPrime = w * v1 * (1d - Math.cos(thetaRad))
+                + z * Math.cos(thetaRad)
+                + (-v * x + u * y) * Math.sin(thetaRad);
+
+        return new Vector(xPrime, yPrime, zPrime);
+    }
+
 }
